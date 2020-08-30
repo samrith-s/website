@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "release": "standard-version"
     },
     "dependencies": {
         "next": "9.5.2",
@@ -30,6 +31,7 @@
         "eslint-plugin-react-hooks": "^4.1.0",
         "husky": "^4.2.5",
         "prettier": "^2.1.1",
+        "standard-version": "^9.0.0",
         "stylelint": "^13.6.1",
         "stylelint-config-idiomatic-order": "^8.1.0",
         "stylelint-config-recommended": "^3.0.0",
