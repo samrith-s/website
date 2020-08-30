@@ -1,0 +1,30 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "css.validate": false,
+    "scss.validate": false,
+    "typescript.format.enable": false,
+    "typescript.validate.enable": false,
+    "javascript.format.enable": false,
+    "javascript.validate.enable": false,
+    "json.format.enable": false,
+    "eslint.run": "onSave",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/.next": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true
+    }
+}
