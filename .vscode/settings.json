@@ -13,6 +13,9 @@
     "javascript.validate.enable": false,
     "json.format.enable": false,
     "eslint.run": "onSave",
+    "files.associations": {
+        ".*rc": "json"
+    },
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
