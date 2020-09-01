@@ -1,6 +1,7 @@
 const colors = {
     base: '#202040',
     light: '#f4f4f4',
+    success: '#5cb85c',
 };
 
 export type Colors = Record<keyof typeof colors, string>;
