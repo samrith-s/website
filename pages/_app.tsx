@@ -8,7 +8,7 @@ const Portfolio: React.FC<{ Component: React.ComponentType; pageProps: any }> = 
         <>
             <NextSeo
                 title="Samrith Shankar"
-                description="Fullstack developer from Bombay working in Paris."
+                description="Fullstack developer from Bombay (🇮🇳) working in Paris (🇫🇷)."
             />
             <Component {...pageProps} />
         </>
