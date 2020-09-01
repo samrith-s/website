@@ -43,7 +43,7 @@ export const Intro: React.FC = () => {
                         Press "Space" to explore
                     </IntroStartText>
                     <motion.div key="sprite" {...DownInOut}>
-                        <Sprite src={IntroSprite} width={120} height={241} frames={8} />
+                        <Sprite src={IntroSprite} width={102} height={241} frames={2} />
                     </motion.div>
                 </AnimatePresence>
             </IntroContainer>
