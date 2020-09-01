@@ -1,6 +1,6 @@
 const colors = {
     base: '#202040',
-    font: '#f4f4f4',
+    light: '#f4f4f4',
 };
 
 export type Colors = Record<keyof typeof colors, string>;
@@ -16,6 +16,7 @@ export type Variables = Record<keyof typeof variables, string>;
 
 export const theme: Theme = {
     colors,
+    variables,
 };
 
 export type Theme = {
