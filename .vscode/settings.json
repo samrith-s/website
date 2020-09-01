@@ -8,9 +8,9 @@
     "css.validate": false,
     "scss.validate": false,
     "typescript.format.enable": false,
-    "typescript.validate.enable": false,
+    "typescript.validate.enable": true,
     "javascript.format.enable": false,
-    "javascript.validate.enable": false,
+    "javascript.validate.enable": true,
     "json.format.enable": false,
     "eslint.run": "onType",
     "files.associations": {

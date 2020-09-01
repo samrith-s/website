@@ -7,6 +7,10 @@
         },
         "sourceType": "module"
     },
+    "env": {
+        "browser": true,
+        "node": true
+    },
     "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier", "import"],
     "extends": [
         "eslint:recommended",
@@ -23,6 +27,7 @@
         "no-undef": "error",
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
+        "react/no-unescaped-entities": "off",
         "import/order": [
             "error",
             {
