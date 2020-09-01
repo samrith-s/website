@@ -2,9 +2,9 @@ import styled, { css, keyframes } from 'styled-components';
 
 interface ScrollerProps {
     src: string;
-    width: number | string;
+    width?: number | string;
     height: number | string;
-    duration: number;
+    duration?: number;
 }
 
 const infinite = keyframes`

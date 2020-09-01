@@ -12,7 +12,7 @@ const variables = {
     borderRadius: 10,
 };
 
-export type Variables = Record<keyof typeof variables, string>;
+export type Variables = Record<keyof typeof variables, number>;
 
 export const theme: Theme = {
     colors,

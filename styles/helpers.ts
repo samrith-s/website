@@ -15,7 +15,7 @@ interface HelperKeyType {
     (key: keyof Colors, ...argv: number[]): HelperReturnType;
 }
 
-interface HelperType<T> {
+interface HelperType<T = number> {
     (...argv: T[]): HelperReturnType;
 }
 
@@ -32,26 +32,26 @@ export const transparentize: HelperKeyType = (key, value) => ({ theme }) =>
 
 export const margin: HelperType = (top = 1, right, bottom, left) => ({
     theme: {
-        variables: { margin },
+        variables: { margin: marginVar },
     },
 }) =>
     _margin(
-        top * margin,
-        (right ?? top) * margin,
-        (bottom ?? top) * margin,
-        (left ?? right ?? top) * margin
+        top * marginVar,
+        (right ?? top) * marginVar,
+        (bottom ?? top) * marginVar,
+        (left ?? right ?? top) * marginVar
     );
 
 export const padding: HelperType<number> = (top = 1, right, bottom, left) => ({
     theme: {
-        variables: { padding },
+        variables: { padding: paddingVar },
     },
 }) =>
     _padding(
-        top * padding,
-        (right ?? top) * padding,
-        (bottom ?? top) * padding,
-        (left ?? right ?? top) * padding
+        top * paddingVar,
+        (right ?? top) * paddingVar,
+        (bottom ?? top) * paddingVar,
+        (left ?? right ?? top) * paddingVar
     );
 
 export const borderRadius: HelperType<number> = (
@@ -61,10 +61,10 @@ export const borderRadius: HelperType<number> = (
     bottomLeft
 ) => ({
     theme: {
-        variables: { borderRadius },
+        variables: { borderRadius: borderRadiusVar },
     },
 }) => css`
-    border-radius: ${topLeft * borderRadius}px ${(topRight ?? topLeft) * borderRadius}px
-        ${(bottomRight ?? topLeft) * borderRadius}px
-        ${(bottomLeft ?? bottomRight ?? topLeft) * borderRadius}px;
+    border-radius: ${topLeft * borderRadiusVar}px ${(topRight ?? topLeft) * borderRadiusVar}px
+        ${(bottomRight ?? topLeft) * borderRadiusVar}px
+        ${(bottomLeft ?? bottomRight ?? topLeft) * borderRadiusVar}px;
 `;

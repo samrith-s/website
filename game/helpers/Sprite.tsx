@@ -10,7 +10,7 @@ interface SpriteProps {
 }
 
 export const Sprite = styled.span.withConfig({
-    shouldForwardProps(prop, defaultValidatorFn) {
+    shouldForwardProp(prop, defaultValidatorFn) {
         return !['src', 'width', 'height'].includes(prop) && defaultValidatorFn(prop);
     },
 })<SpriteProps>`
@@ -18,7 +18,8 @@ export const Sprite = styled.span.withConfig({
         display: inline-block;
         width: ${width}px;
         height: ${height}px;
-        animation: ${(props) => moveSprite(props)} ${1 / rate}s steps(${frames}) infinite;
+        animation: ${({ theme, ...props }) => moveSprite(props)} ${1 / rate}s steps(${frames})
+            infinite;
         background-image: url(${src});
     `}
 `;
