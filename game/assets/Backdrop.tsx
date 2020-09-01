@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import CloudsSprite from '../../public/sprites/clouds.png';
-import { lighten } from '../../styles/helpers';
+import { lighten, padding } from '../../styles/helpers';
 import { Scroller } from '../helpers/Scroller';
 
 const Container = styled.div`
@@ -26,12 +26,19 @@ const Scene = styled.div`
     right: 0;
     bottom: 20vh;
     left: 0;
-    padding-top: 30vh;
+    margin-top: auto;
 `;
 
 const Ground = styled.div`
+    display: flex;
     height: 100%;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    ${padding(1)}
     background: ${lighten('base', 0.05)};
+    color: ${lighten('base', 0.25)};
+    font-size: 0.8rem;
 `;
 
 export const Backdrop: React.FC = ({ children }) => (
@@ -40,6 +47,8 @@ export const Backdrop: React.FC = ({ children }) => (
             <Scroller src={CloudsSprite} height="30vh" />
             <Scene>{children}</Scene>
         </ScrollerContainer>
-        <Ground />
+        <Ground>
+            <p>Samrith Shankar (c) {new Date().getFullYear()}.</p>
+        </Ground>
     </Container>
 );
