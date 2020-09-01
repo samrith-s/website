@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled, { keyframes, css } from 'styled-components';
 
 interface SpriteProps {
@@ -9,7 +10,7 @@ interface SpriteProps {
     vertical?: boolean;
 }
 
-export const Sprite = styled.span.withConfig({
+export const Sprite = styled(motion.span).withConfig({
     shouldForwardProp(prop, defaultValidatorFn) {
         return !['src', 'width', 'height'].includes(prop) && defaultValidatorFn(prop);
     },
