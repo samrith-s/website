@@ -2,4 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.1](https://github.com/samrith-s/portfolio/compare/v0.0.1-alpha.0...v0.0.1-alpha.1) (2020-09-01)
+
+
+### Features
+
+* **animation:** added entry exit animations and helpers ([7c5cf40](https://github.com/samrith-s/portfolio/commit/7c5cf40f0f4c1af8308571635d83230c3d2aeeda))
+* **app:** added proper document to import fonts ([8667eb6](https://github.com/samrith-s/portfolio/commit/8667eb6fbf0b1f0944fec4e41aaa78cbdf12f26a))
+* **app:** added Scroller component to handle infinite scrolling ([44dad7f](https://github.com/samrith-s/portfolio/commit/44dad7fcf35e04b210fd858cdaded98af8fe7b01))
+* **app:** added Sprite component to handle spritesheets ([a87700d](https://github.com/samrith-s/portfolio/commit/a87700d5b2d29bdc78e1d3d8666851cfe1bf7e47))
+* **app:** added sprites ([aa884c9](https://github.com/samrith-s/portfolio/commit/aa884c9e74c9aac5aefdabd253a68e050df015cc))
+* **app:** updated favicon ([f371e35](https://github.com/samrith-s/portfolio/commit/f371e354f841aab017489e5407d7e8cd946e25c7))
+* **scene:** added Backdrop to provide consistent background ([ecb13bb](https://github.com/samrith-s/portfolio/commit/ecb13bbe082a4b4e0ea335c8463b264cb05f320b))
+* **scene:** added more content to Intro scene ([18749d1](https://github.com/samrith-s/portfolio/commit/18749d1885be872b43387eae12d43477afc31a7e))
+* **scene:** added simple Intro scene ([ad26d13](https://github.com/samrith-s/portfolio/commit/ad26d1336dc34e66a000fdf53a77817e7f0ea91a))
+* **seo:** setup next-seo ([6f54712](https://github.com/samrith-s/portfolio/commit/6f5471282f91b55ab43ece4abcec4adf9c52f515))
+* **steup:** added framer-motion ([701ed49](https://github.com/samrith-s/portfolio/commit/701ed49c913d3241e968ac45e749494903f1a6b5))
+
+
+### Bug Fixes
+
+* **app:** adjusted Backdrop and added Footer text ([cb44111](https://github.com/samrith-s/portfolio/commit/cb441111f3d1d7e32a2915a82910c715d3cfef3a))
+* **lint:** fixed all Typescript compile errors ([f9d425b](https://github.com/samrith-s/portfolio/commit/f9d425ba76c4839301f2ce5353f49a04ef1ed0bb))
+* **scene:** fix Intro sprite wobble ([0c8a3d8](https://github.com/samrith-s/portfolio/commit/0c8a3d86f12329201a186c29929b0ecbca79ba85))
+
 ### [0.0.1-alpha.0](https://github.com/samrith-s/portfolio/compare/v0.0.0...v0.0.1-alpha.0) (2020-08-30)
