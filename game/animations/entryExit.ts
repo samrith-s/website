@@ -1,11 +1,19 @@
-import { EntryExit } from './_animationCreator';
+import { EntryExit, Transitions, EntryExitAnimationReturn } from './creators';
 
-export const UpInOut = EntryExit({
-    transform: ['translateY(-100%)', 'translateY(0%)', 'translateY(-100%)'],
-    opacity: [0, 1, 0],
-});
+export const UpInOut = (transitions?: Transitions): EntryExitAnimationReturn =>
+    EntryExit(
+        {
+            y: ['0%', '-100%'],
+            opacity: [1, 0],
+        },
+        transitions
+    );
 
-export const DownInOut = EntryExit({
-    transform: ['translateY(100%)', 'translateY(0%)', 'translateY(100%)'],
-    opacity: [0, 1, 0],
-});
+export const DownInOut = (transitions?: Transitions): EntryExitAnimationReturn =>
+    EntryExit(
+        {
+            y: ['0', '100%'],
+            opacity: [1, 0],
+        },
+        transitions
+    );
