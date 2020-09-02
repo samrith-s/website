@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Intro } from '../game/controllers/scenes/Intro.scene';
+import { Intro } from '../game/scenes/Intro.scene';
 import { GlobalStyle } from '../styles';
 import { theme } from '../styles/theme';
 
