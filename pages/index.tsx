@@ -1,20 +1,28 @@
+import { AnimatePresence } from 'framer-motion';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Intro } from '../game/scenes/Intro.scene';
+import { Backdrop } from '../game/assets/Backdrop';
+import { GameContext } from '../game/context';
+import { SceneFactory } from '../game/scenes/_factory';
+import { SCENES } from '../game/variables';
 import { GlobalStyle } from '../styles';
 import { theme } from '../styles/theme';
 
-const Home: React.FC = () => {
+export interface HomeProps {
+    scene?: string;
+}
+
+const Home: React.FC<HomeProps> = ({ scene: urlScene = SCENES.INTRO }) => {
     const router = useRouter();
-    const { scene: urlScene } = router.query;
     const [scene, setScene] = useState(urlScene);
 
     useEffect(() => {
-        if (!scene) {
-            setScene('intro');
-            router.replace(`/?scene=intro`, `/?scene=intro`, {
+        if (!scene || !window.location.search.includes('scene=')) {
+            setScene(SCENES.INTRO);
+            router.replace(`/?scene=${SCENES.INTRO}`, `/?scene=${SCENES.INTRO}`, {
                 shallow: true,
             });
         }
@@ -22,10 +30,34 @@ const Home: React.FC = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <Intro />
+            <GameContext.Provider
+                value={{
+                    scene,
+                    setScene,
+                }}
+            >
+                <GlobalStyle />
+                <Backdrop>
+                    <AnimatePresence>
+                        {SceneFactory.map(({ Component, key }) =>
+                            key === scene ? <Component key={key} /> : null
+                        )}
+                    </AnimatePresence>
+                </Backdrop>
+            </GameContext.Provider>
         </ThemeProvider>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
+    const {
+        query: { scene = SCENES.INTRO },
+    } = context;
+    return {
+        props: {
+            scene: scene as string,
+        },
+    };
 };
 
 export default Home;
