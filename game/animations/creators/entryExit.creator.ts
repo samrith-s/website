@@ -1,7 +1,15 @@
 import { TargetAndTransition, Transition, Variants } from 'framer-motion';
 
 export type EntryExitAnimationReturn = {
-    variants: Variants;
+    variants: {
+        variants: Variants;
+    };
+    all: {
+        variants: Variants;
+        initial: 'exit';
+        animate: 'enter';
+        exit: 'exit';
+    };
 };
 
 type AnimationKeys = keyof TargetAndTransition;
@@ -17,35 +25,49 @@ export function EntryExit(
     >,
     transitions?: Transitions
 ): EntryExitAnimationReturn {
+    const enter = {};
+    const exit = {};
+
     const compiled = Object.entries(animation).reduce<EntryExitAnimationReturn>(
         (acc, [key, value]) => {
-            let enter, exit;
+            let _enter, _exit;
 
             if (Array.isArray(value)) {
-                [enter, exit] = value;
+                [_enter, _exit] = value;
             } else {
-                enter = exit = value;
+                _enter = _exit = value;
             }
 
-            acc.variants.enter[key] = enter;
-            acc.variants.exit[key] = exit;
+            enter[key] = _enter;
+            exit[key] = _exit;
             return acc;
         },
         {
             variants: {
-                enter: {},
-                exit: {},
+                variants: {
+                    enter,
+                    exit,
+                },
+            },
+            all: {
+                variants: {
+                    enter,
+                    exit,
+                },
+                initial: 'exit',
+                animate: 'enter',
+                exit: 'exit',
             },
         }
     );
 
-    compiled.variants.enter = {
-        ...compiled.variants.enter,
+    compiled.variants.variants.enter = {
+        ...compiled.variants.variants.enter,
         transition: transitions?.enter,
     };
 
-    compiled.variants.exit = {
-        ...compiled.variants.exit,
+    compiled.variants.variants.exit = {
+        ...compiled.variants.variants.exit,
         transition: transitions?.exit,
     };
 
