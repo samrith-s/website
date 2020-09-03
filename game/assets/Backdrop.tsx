@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 import CloudsSprite from '../../public/sprites/clouds.png';
@@ -16,6 +17,7 @@ const Container = styled.div`
 `;
 
 const ScrollerContainer = styled.div`
+    z-index: 1;
     width: 100%;
     height: 100%;
 `;
@@ -26,10 +28,12 @@ const Scene = styled.div`
     right: 0;
     bottom: 20vh;
     left: 0;
-    margin-top: auto;
+    margin-top: 300px;
 `;
 
 const Ground = styled.div`
+    position: relative;
+    z-index: 2;
     display: flex;
     height: 100%;
     flex-flow: column;
@@ -45,7 +49,9 @@ export const Backdrop: React.FC = ({ children }) => (
     <Container>
         <ScrollerContainer>
             <Scroller src={CloudsSprite} height="30vh" />
-            <Scene>{children}</Scene>
+            <Scene>
+                <AnimatePresence>{children}</AnimatePresence>
+            </Scene>
         </ScrollerContainer>
         <Ground>
             <p>Samrith Shankar (c) {new Date().getFullYear()}.</p>
