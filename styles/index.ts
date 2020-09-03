@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     #__next {
+        overflow: hidden;
         min-height: 100%;
     }
 
