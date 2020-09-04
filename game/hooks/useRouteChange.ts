@@ -44,7 +44,6 @@ export const useRouteChange = (key: SCENE_VALUES): void => {
                     }
 
                     if (isEnter) {
-                        console.log(key, 'isEnter!!');
                         navigator.navigate(key);
                     }
                 }
