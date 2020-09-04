@@ -9,5 +9,4 @@ export const SceneContainer = styled(motion.div)`
     left: 0;
     display: flex;
     width: 100%;
-    height: 100%;
 `;

@@ -23,6 +23,9 @@ export const Scroller = styled.div.withConfig({
     },
 })<ScrollerProps>`
     ${({ width = 'auto', height = 'auto', src, duration = 500 }) => css`
+        position: absolute;
+        top: 0;
+        left: 0;
         width: ${width};
         height: ${typeof height === 'number' ? height + 'px' : height};
         animation: ${infinite} ${duration}s linear infinite;
