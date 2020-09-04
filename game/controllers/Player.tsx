@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import styled from 'styled-components';
 
 import RunSprite from '../../public/sprites/run.png';
 import StillSprite from '../../public/sprites/still.png';
 import { DownInOut } from '../animations/entryExit';
-import { ScrollContext } from '../context';
+import { GameContext, SceneContext } from '../context';
 import { Sprite } from '../helpers/Sprite';
 
 const SpriteStates: SpriteStatesType = {
@@ -53,19 +53,21 @@ const PlayerWrapper = styled.div<{ flipped?: boolean }>`
 `;
 
 export const Player: React.FC = () => {
-    const { scroll, setScroll } = useContext(ScrollContext);
+    const { SceneRef } = useContext(SceneContext);
+    const { scene, setScene } = useContext(GameContext);
     const [running, setRunning] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
-    const el = useMemo(() => (process.browser ? document.getElementById('scene') : null), []);
+    const player = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const toggleRunning = (e: KeyboardEvent) => {
+            const el = SceneRef.current;
             const { code } = e;
             const isLeftOrRight = code === ARROWS.LEFT || code === ARROWS.RIGHT;
             const isLeft = code === ARROWS.LEFT;
             const isRight = code === ARROWS.RIGHT;
-            const leftAllowed = scroll < 0;
-            const rightAllowed = el.offsetWidth + scroll < el.scrollWidth;
+            const leftAllowed = el.scrollLeft > 0;
+            const rightAllowed = el.scrollLeft + el.offsetWidth < el.scrollWidth;
 
             if (isLeftOrRight) {
                 if (!running) {
@@ -79,11 +81,11 @@ export const Player: React.FC = () => {
                 }
 
                 if (isLeft && isFlipped && leftAllowed) {
-                    setScroll(scroll + 50);
+                    el.scrollLeft -= 50;
                 }
 
                 if (isRight && !isFlipped && rightAllowed) {
-                    setScroll(scroll - 50);
+                    el.scrollLeft += 50;
                 }
             }
         };
@@ -101,11 +103,11 @@ export const Player: React.FC = () => {
             document.removeEventListener('keydown', toggleRunning, true);
             document.removeEventListener('keyup', toggleStill, true);
         };
-    }, [running, isFlipped, el, scroll, setScroll]);
+    }, [running, isFlipped, scene, setScene, SceneRef]);
 
     useEffect(() => {
         const onKeyDown = (e) => {
-            if (['ArrowLeft', 'ArrowRight'].includes(e.code)) {
+            if ([ARROWS.LEFT, ARROWS.RIGHT].includes(e.code)) {
                 e.preventDefault();
             }
         };
@@ -120,7 +122,7 @@ export const Player: React.FC = () => {
     const spriteProps = useMemo(() => (running ? SpriteStates.run : SpriteStates.still), [running]);
 
     return (
-        <PlayerAnimator key="player" {...DownInOut().all}>
+        <PlayerAnimator key="player" {...DownInOut().all} ref={player}>
             <PlayerWrapper flipped={isFlipped}>
                 <Sprite {...spriteProps} />
             </PlayerWrapper>
