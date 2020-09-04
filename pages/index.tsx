@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import { UpInOut } from '../game/animations/entryExit';
 import { Backdrop } from '../game/assets/Backdrop';
-import { GameContext } from '../game/context';
-import { SceneFactory } from '../game/scenes/_factory';
+import { GameContext, SceneContext } from '../game/context';
+import { SceneRef, IndividualSceneRefs } from '../game/context/refs';
+import { SceneFactory, PrimaryScene } from '../game/scenes/_factory';
 import { SCENES } from '../game/variables';
 import { GlobalStyle } from '../styles';
+import { PrimarySceneWrapper, SecondarySceneWrapper } from '../styles/containers';
 import { theme } from '../styles/theme';
 
 export interface HomeProps {
@@ -17,34 +20,62 @@ export interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ scene: urlScene = SCENES.INTRO }) => {
     const router = useRouter();
-    const [scene, setScene] = useState(urlScene);
+    const [isIntro, setIsIntro] = useState(urlScene === SCENES.INTRO);
 
     useEffect(() => {
-        if (!scene || !window.location.search.includes('scene=')) {
-            setScene(SCENES.INTRO);
+        if (!window.location.search.includes('scene=')) {
+            setIsIntro(true);
             router.replace(`/?scene=${SCENES.INTRO}`, `/?scene=${SCENES.INTRO}`, {
                 shallow: true,
             });
         }
-    }, [scene, router]);
+    }, [isIntro, router]);
 
     return (
         <ThemeProvider theme={theme}>
-            <GameContext.Provider
+            <SceneContext.Provider
                 value={{
-                    scene,
-                    setScene,
+                    SceneRef,
+                    IndividualSceneRefs,
                 }}
             >
-                <GlobalStyle />
-                <Backdrop>
-                    <AnimatePresence>
-                        {SceneFactory.map(({ Component, key }) =>
-                            key === scene ? <Component key={key} /> : null
-                        )}
-                    </AnimatePresence>
-                </Backdrop>
-            </GameContext.Provider>
+                <GameContext.Provider
+                    value={{
+                        isIntro,
+                        setIsIntro,
+                    }}
+                >
+                    <GlobalStyle />
+                    <Backdrop>
+                        <AnimatePresence exitBeforeEnter>
+                            {isIntro && (
+                                <PrimarySceneWrapper key="primary-scene">
+                                    <PrimaryScene.Component key={PrimaryScene.key} />
+                                </PrimarySceneWrapper>
+                            )}
+                            {!isIntro && (
+                                <SecondarySceneWrapper
+                                    key="secondary-scene"
+                                    {...UpInOut({
+                                        enter: {
+                                            when: 'beforeChildren',
+                                            staggerChildren: 0.4,
+                                        },
+                                        exit: {
+                                            when: 'afterChilren',
+                                            staggerChildren: 0.4,
+                                        },
+                                    }).all}
+                                >
+                                    {SceneFactory.map(({ Component, key }) => (
+                                        <Component key={key} ref={IndividualSceneRefs[key]} />
+                                    ))}
+                                </SecondarySceneWrapper>
+                            )}
+                        </AnimatePresence>
+                    </Backdrop>
+                </GameContext.Provider>
+            </SceneContext.Provider>
         </ThemeProvider>
     );
 };
