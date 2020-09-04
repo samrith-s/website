@@ -33,29 +33,17 @@ export const Intro: React.FC = () => {
     });
 
     return (
-        <IntroContainer
-            key={0}
-            {...DownInOut({
-                enter: {
-                    when: 'beforeChildren',
-                    staggerChildren: 0.25,
-                },
-                exit: {
-                    when: 'beforeChildren',
-                    staggerChildren: 0.25,
-                },
-            }).all}
-        >
-            <motion.h1 key={1} {...UpInOut().variants}>
+        <IntroContainer>
+            <motion.h1 key={1} {...UpInOut().all}>
                 Samrith Shankar
             </motion.h1>
-            <motion.p key={2} {...UpInOut().variants}>
+            <motion.p key={2} {...UpInOut().all}>
                 Fullstack developer from Bombay (🇮🇳) living in Paris (🇫🇷).
             </motion.p>
-            <IntroStartText key={3} {...DownInOut().variants}>
+            <IntroStartText key={3} {...DownInOut().all}>
                 Press "Space" to explore
             </IntroStartText>
-            <motion.div key={4} {...DownInOut().variants}>
+            <motion.div key={4} {...DownInOut().all}>
                 <Sprite src={IntroSprite} width={102} height={241} frames={2} />
             </motion.div>
         </IntroContainer>
