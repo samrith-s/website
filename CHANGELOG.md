@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.3](https://github.com/samrith-s/portfolio/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2020-09-04)
+
+
+### Features
+
+* **app:** added Player ([ed615af](https://github.com/samrith-s/portfolio/commit/ed615afc5402f66c4b5e538bbe06aa3e18b20d0f))
+* **scene:** added ScrollContext to keep track of scroll ([ad7ce74](https://github.com/samrith-s/portfolio/commit/ad7ce74bc8238c8a0cadc14d8616d0c427d38df3))
+* **scene:** implemented scroll in scene by simulating About ([a9f4a75](https://github.com/samrith-s/portfolio/commit/a9f4a7566934be7d47efedef819503c4281820f7))
+
+
+### Bug Fixes
+
+* **animation:** updated integration of Intro scene animations ([2d81440](https://github.com/samrith-s/portfolio/commit/2d81440d07e256bdd13d90f03dc290e692bad7dd))
+* **sprite:** updated RunSprite ([d9263e6](https://github.com/samrith-s/portfolio/commit/d9263e603a187ae05fdd223b88acd44a65a10af0))
+
 ### [0.0.1-alpha.2](https://github.com/samrith-s/portfolio/compare/v0.0.1-alpha.0...v0.0.1-alpha.2) (2020-09-03)
 
 
