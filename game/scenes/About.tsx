@@ -1,28 +1,20 @@
-import { motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
 
+import { SceneContainer } from '../../styles/containers';
+import { DownInOut } from '../animations/entryExit';
 import { useScene } from '../hooks/useScene';
 import { SCENES } from '../variables';
 
-const variants: Variants = {
-    enter: {
-        y: '0',
-        opacity: 1,
-    },
-    exit: {
-        y: '-80vh',
-        opacity: 0,
-    },
-};
-
-const AboutContainer = styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    display: flex;
+const AboutContainer = styled(SceneContainer)`
+    display: grid;
+    width: max-content;
     align-items: flex-end;
+    grid-auto-columns: 300px;
+    grid-auto-flow: column;
+    grid-template-rows: auto;
 `;
+
+const randomGrids = new Array(30).fill(1);
 
 export const About: React.FC = () => {
     useScene(SCENES.INTRO, (e) => {
@@ -30,10 +22,19 @@ export const About: React.FC = () => {
     });
 
     return (
-        <AboutContainer>
-            <motion.div key="txt" variants={variants} initial="exit" animate="enter" exit="exit">
-                This is the about scene!{' '}
-            </motion.div>
+        <AboutContainer {...DownInOut().all}>
+            {randomGrids.map((grid, index) => (
+                <div
+                    key={index}
+                    style={{
+                        background: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+                        height: '100%',
+                        opacity: 0.75,
+                    }}
+                >
+                    Grid {index}
+                </div>
+            ))}
         </AboutContainer>
     );
 };
