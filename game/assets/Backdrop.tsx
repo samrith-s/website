@@ -1,13 +1,12 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useContext, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import CloudsSprite from '../../public/sprites/clouds.png';
 import { lighten, padding, color } from '../../styles/helpers';
-import { GameContext, ScrollContext } from '../context';
+import { GameContext, SceneContext } from '../context';
 import { Player } from '../controllers/Player';
 import { Scroller } from '../helpers/Scroller';
-import { SCENES } from '../variables';
 
 const Container = styled.div`
     position: relative;
@@ -33,14 +32,10 @@ const Scene = styled.div`
     display: flex;
     width: 100%;
     height: calc(100% + 50px);
+    overflow-x: auto;
     overflow-y: hidden;
     ${padding(30, 0, 5)}
-`;
-
-const SceneContent = styled(motion.div)`
-    position: relative;
-    min-width: 100vw;
-    height: 100%;
+    scroll-behavior: smooth;
 `;
 
 const SceneScrollHide = styled.div`
@@ -67,24 +62,18 @@ const Ground = styled.div`
 `;
 
 export const Backdrop: React.FC = ({ children }) => {
-    const { scene } = useContext(GameContext);
-    const [scroll, setScroll] = useState(0);
+    const { SceneRef } = useContext(SceneContext);
+    const { isIntro } = useContext(GameContext);
 
     return (
         <Container>
             <ScrollerContainer>
                 <Scroller src={CloudsSprite} height="30vh" width="100vw" />
-                <Scene id="scene">
-                    <SceneContent key="scene" animate={{ x: scroll }}>
-                        <AnimatePresence>{children}</AnimatePresence>
-                    </SceneContent>
+                <Scene ref={SceneRef}>
+                    <AnimatePresence>{children}</AnimatePresence>
                     <SceneScrollHide />
                 </Scene>
-                <ScrollContext.Provider value={{ scroll, setScroll }}>
-                    <AnimatePresence>
-                        {scene !== SCENES.INTRO && <Player key="player" />}
-                    </AnimatePresence>
-                </ScrollContext.Provider>
+                <AnimatePresence>{!isIntro && <Player key="player" />}</AnimatePresence>
             </ScrollerContainer>
             <Ground>
                 <p>Samrith Shankar (c) {new Date().getFullYear()}.</p>

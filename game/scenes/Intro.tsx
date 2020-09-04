@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 import styled from 'styled-components';
 
 import IntroSprite from '../../public/sprites/intro.png';
@@ -27,13 +28,13 @@ const IntroStartText = styled(motion.p)`
     ${borderRadius(1)}
 `;
 
-export const Intro: React.FC = () => {
+export const Intro = memo(() => {
     useScene(SCENES.ABOUT, (e) => {
         return e.code === 'Space';
     });
 
     return (
-        <IntroContainer>
+        <IntroContainer key="intro-inner">
             <motion.h1 key={1} {...UpInOut().all}>
                 Samrith Shankar
             </motion.h1>
@@ -48,4 +49,4 @@ export const Intro: React.FC = () => {
             </motion.div>
         </IntroContainer>
     );
-};
+});
