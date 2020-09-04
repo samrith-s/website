@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import CloudsSprite from '../../public/sprites/clouds.png';
@@ -65,11 +65,38 @@ export const Backdrop: React.FC = ({ children }) => {
     const { SceneRef } = useContext(SceneContext);
     const { isIntro } = useContext(GameContext);
 
+    useEffect(() => {
+        const scene = SceneRef.current as HTMLDivElement;
+        const preventDefault = (e: Event) => e.preventDefault();
+
+        const preventKeyboardDefault = (e: KeyboardEvent) => {
+            if ([32, 33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
+                e.preventDefault();
+            }
+        };
+
+        if (scene) {
+            scene.addEventListener('wheel', preventDefault, true);
+            scene.addEventListener('scroll', preventDefault, true);
+            scene.addEventListener('touchmove', preventDefault, true);
+            scene.addEventListener('keydown', preventKeyboardDefault, true);
+        }
+
+        return () => {
+            if (scene) {
+                scene.removeEventListener('wheel', preventDefault, true);
+                scene.removeEventListener('scroll', preventDefault, true);
+                scene.removeEventListener('touchmove', preventDefault, true);
+                scene.removeEventListener('keydown', preventKeyboardDefault, true);
+            }
+        };
+    }, [SceneRef]);
+
     return (
         <Container>
             <ScrollerContainer>
                 <Scroller src={CloudsSprite} height="30vh" width="100vw" />
-                <Scene ref={SceneRef}>
+                <Scene ref={SceneRef} onScroll={(e) => e.preventDefault()}>
                     <AnimatePresence>{children}</AnimatePresence>
                     <SceneScrollHide />
                 </Scene>
