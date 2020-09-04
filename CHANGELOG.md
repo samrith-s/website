@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.4](https://github.com/samrith-s/portfolio/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2020-09-04)
+
+
+### Features
+
+* **hooks:** added useRouteChange hook to manage seamless transition when moving ([cf8d6ef](https://github.com/samrith-s/portfolio/commit/cf8d6eff0b7c5581ef998c856120be7348a1a1fd))
+* **hooks:** added useScroll hook to scroll to section on page load ([80f2699](https://github.com/samrith-s/portfolio/commit/80f26999f905cd7cc344887c009267e52b222101))
+* **scene:** added Work scene with dummy content ([c98031a](https://github.com/samrith-s/portfolio/commit/c98031aeb7fa7ae119116c96a33f9a283d94f9cf))
+
+
+### Bug Fixes
+
+* **scene:** resolve TypeScript errors relating to forwarded refs ([0e6a57e](https://github.com/samrith-s/portfolio/commit/0e6a57e3aae3158a773fc22207096ad4a3338c7d))
+
 ### [0.0.1-alpha.3](https://github.com/samrith-s/portfolio/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2020-09-04)
 
 
