@@ -18,7 +18,7 @@ const AboutContainer = styled(SceneContainer)`
 const randomGrids = new Array(10).fill(1);
 
 export const About = memo(
-    forwardRef((_, ref) => {
+    forwardRef<HTMLDivElement>((_, ref) => {
         useScene(SCENES.INTRO, (e) => {
             return (e as KeyboardEvent).code === 'Space';
         });

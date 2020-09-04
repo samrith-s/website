@@ -7,7 +7,7 @@ import { useScroll } from '../hooks/useScroll';
 import { SCENES } from '../variables';
 
 export const Work = memo(
-    forwardRef((_, ref) => {
+    forwardRef<HTMLDivElement>((_, ref) => {
         useScroll(SCENES.WORK);
         useRouteChange(SCENES.WORK);
 
