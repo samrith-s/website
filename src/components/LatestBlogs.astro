@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import { cn } from "../utils/cn";
 import { SEASONS } from "../consts";
 
-const initialPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const initialPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .filter((p) => p.slug.toLowerCase().trim() !== "dummy");
 
 const posts = [initialPosts.at(0), initialPosts.at(1), initialPosts.at(2)];
 ---
