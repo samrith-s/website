@@ -18,6 +18,10 @@ export default defineConfig({
   output: "server",
   adapter: vercel({
     edgeMiddleware: true,
+    imageService: true,
+    webAnalytics: {
+      enabled: true,
+    },
   }),
   markdown: {
     remarkPlugins: [],
