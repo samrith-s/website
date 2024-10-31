@@ -44,5 +44,13 @@ const { description } = Astro.props;
       </span>
     )
   }
-  <slot />
+  <span class="icon-inner">
+    <slot />
+  </span>
 </span>
+<style>
+  .icon-inner > svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+</style>
