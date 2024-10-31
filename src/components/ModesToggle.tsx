@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { setCookie } from "../utils/cookies";
+import { useEffect, useState } from "react";
 import { Modes } from "../consts";
 import { cn } from "../utils/cn";
 
@@ -8,11 +7,14 @@ export type ModeProps = {
   size?: number;
 };
 
-export function ModesToggle({
-  mode: modeProps = Modes.LIGHT,
-  size = 18,
-}: ModeProps) {
-  const [mode, setMode] = useState<Modes>(modeProps);
+export function ModesToggle({ size = 18 }: ModeProps) {
+  const [mode, setMode] = useState<Modes>(Modes.LIGHT);
+
+  useEffect(() => {
+    if (window?.MODE) {
+      setMode(window.MODE as Modes);
+    }
+  }, []);
 
   return (
     <button
@@ -33,7 +35,7 @@ export function ModesToggle({
         console.log("on click called....");
         setMode((mode) => {
           const newMode = mode === Modes.LIGHT ? Modes.DARK : Modes.LIGHT;
-          setCookie("mode", newMode);
+          localStorage.setItem("mode", newMode);
           document.documentElement.classList.remove(mode);
           document.documentElement.classList.add(newMode);
 

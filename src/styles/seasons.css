@@ -20,11 +20,6 @@
   --season-winter-dark-bg: 3, 21, 28;
   --season-winter-dark-text: 224, 242, 254;
 
-  /** Generic season color */
-  --season-primary: 255, 255, 255;
-  --season-bg: 255, 255, 255;
-  --season-text: 255, 255, 255;
-
   /* x: rgb(224, 242, 254); */
   /* x: #fef2f2; */
   /* x: #1d0303; */

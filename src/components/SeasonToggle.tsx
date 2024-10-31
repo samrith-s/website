@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { CURRENT_SEASON, Seasons } from "../consts";
-import { deleteCookie, setCookie } from "../utils/cookies";
+import { Seasons } from "../consts";
 
 import { cn } from "../utils/cn";
 
@@ -24,12 +23,6 @@ export function SeasonsToggle({
       newSeason = Seasons.WINTER;
     } else {
       newSeason = Seasons.SUMMER;
-    }
-
-    if (newSeason === CURRENT_SEASON) {
-      deleteCookie("season");
-    } else {
-      setCookie("season", newSeason);
     }
 
     document.documentElement.dataset.season = newSeason;

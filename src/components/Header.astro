@@ -7,10 +7,9 @@ import { SeasonsToggle } from "./SeasonToggle";
 
 type Props = {
   season?: Seasons;
-  mode?: Modes;
 };
 
-const { season, mode } = Astro.props;
+const { season } = Astro.props;
 ---
 
 <header
@@ -21,7 +20,11 @@ const { season, mode } = Astro.props;
     class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-5xl text-inherit"
   >
     <div class="flex items-center gap-4 shrink-0">
-      <a href="/" class="ignore">
+      <a
+        href="/"
+        class="ignore"
+        aria-label="Logo of Samrith Shankar - an S inside a squircle"
+      >
         <Logo />
       </a>
 
@@ -29,7 +32,7 @@ const { season, mode } = Astro.props;
     </div>
 
     <div class="flex items-center justify-center gap-2 text-inherit">
-      <ModesToggle mode={mode} client:load />
+      <ModesToggle client:load />
       <BlogLink />
     </div>
   </nav>

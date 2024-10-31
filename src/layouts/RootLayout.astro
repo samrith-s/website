@@ -16,23 +16,34 @@ type Props = {
 const { title, description, season } = Astro.props;
 
 const currentSeason = (season || CURRENT_SEASON) as Seasons;
-
-const modeCookie = Astro.cookies.get("mode");
-const currentMode = (modeCookie?.value || "light") as Modes;
 ---
 
 <!doctype html>
-<html lang="en" class={currentMode} data-season={currentSeason}>
+<html lang="en" data-season={currentSeason}>
   <head>
+    <script is:inline>
+      let mode = localStorage.getItem("mode");
+
+      if (!mode) {
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          mode = "dark";
+        } else {
+          mode = "light";
+        }
+      }
+
+      localStorage.setItem("mode", mode);
+      document.querySelector("html").classList.add(mode);
+      window.MODE = mode;
+    </script>
     <BaseHead title={title} description={description} />
-    <ClientRouter />
+    <!-- <ClientRouter /> -->
   </head>
   <body class="bg-inherit">
-    <Header
-      season={currentSeason}
-      mode={currentMode}
-      transition:persist="false"
-    />
+    <Header season={currentSeason} transition:persist="false" />
     <main
       class="relative z-[1] max-w-5xl mx-auto w-full bg-inherit px-4"
       id="main"
