@@ -7,5 +7,17 @@
   "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.enable": true,
-  "prettier.enable": true
+  "eslint.useFlatConfig": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.enable": true,
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

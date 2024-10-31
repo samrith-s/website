@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import FormattedDate from "../components/FormattedDate.astro";
-import { Seasons, SEASONS } from "../consts";
-import { cn } from "../utils/cn";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { Seasons, SEASONS } from "@/consts";
+import { cn } from "@/utils/cn";
 import RootLayout from "./RootLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {

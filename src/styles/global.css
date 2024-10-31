@@ -18,15 +18,16 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(var(--season-bg), 1);
-    color: rgba(var(--season-text), 1);
-
-    @apply transition-colors duration-1000 ease-in-out;
   }
 
   body {
     width: 100vw;
     height: 100%;
     overflow: auto;
+    background-color: rgba(var(--season-bg), 1);
+    color: rgba(var(--season-text), 1);
+
+    @apply transition-colors duration-1000 ease-in-out;
   }
 
   h1,

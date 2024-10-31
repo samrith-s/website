@@ -26,7 +26,9 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [],
   },
-
+  experimental: {
+    contentIntellisense: true,
+  },
   integrations: [
     expressiveCode({
       themes: ["ayu-dark"],

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import { SEASONS } from "../consts";
-import { cn } from "../utils/cn";
+import { SEASONS } from "@/consts";
+import { cn } from "@/utils/cn";
 
 const initialPosts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())

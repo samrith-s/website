@@ -1,10 +1,10 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 
-import { CURRENT_SEASON, Seasons } from "../consts";
+import { CURRENT_SEASON, Seasons } from "@/consts";
 
 type Props = {
   title?: string;
@@ -18,7 +18,7 @@ const { title, description, season } = Astro.props;
 const currentSeason = (season || CURRENT_SEASON) as Seasons;
 ---
 
-<!doctype html>
+<!-- eslint-disable no-undef --><!doctype html>
 <html lang="en" data-season={currentSeason}>
   <head>
     <script is:inline>

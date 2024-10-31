@@ -1,16 +1,15 @@
 ---
-import SpeedInsights from "@vercel/speed-insights/astro";
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import "../styles/global.css";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import "@/styles/global.css";
 
-interface Props {
+type Props = {
   title?: string;
   description?: string;
   image?: string;
   mode?: string;
-}
+};
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 

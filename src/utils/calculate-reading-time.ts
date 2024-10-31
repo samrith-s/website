@@ -14,6 +14,7 @@ export function calculateReadingTime(text: string): string | undefined {
     }
     return undefined;
   } catch (e) {
+    console.error(e);
     return undefined;
   }
 }

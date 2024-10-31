@@ -1,12 +1,12 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
-import { calculateReadingTime } from "../../utils/calculate-reading-time";
+import BlogPost from "@/layouts/BlogPost.astro";
+import { calculateReadingTime } from "@/utils/calculate-reading-time";
 
 const { slug } = Astro.params;
 
-const posts = (await getCollection("blog")) as Array<CollectionEntry<"blog">>;
-const post = posts.find((p) => p.slug === slug)!;
+const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+const post = posts.find((p) => p.slug === slug) as CollectionEntry<"blog">;
 
 type Props = CollectionEntry<"blog">;
 
