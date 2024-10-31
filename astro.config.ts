@@ -8,7 +8,6 @@ import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import expressiveCode from "astro-expressive-code";
-import remarkToc from "remark-toc";
 
 import react from "@astrojs/react";
 
@@ -21,7 +20,7 @@ export default defineConfig({
     edgeMiddleware: true,
   }),
   markdown: {
-    remarkPlugins: [remarkToc()],
+    remarkPlugins: [],
   },
 
   integrations: [
