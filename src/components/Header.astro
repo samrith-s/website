@@ -1,39 +1,30 @@
 ---
-import type { Seasons } from "@/consts";
-import BlogLink from "./BlogLink.astro";
 import Logo from "./Logo.astro";
 import { ModesToggle } from "./ModesToggle";
-import { SeasonsToggle } from "./SeasonToggle";
-
-type Props = {
-  season?: Seasons;
-};
-
-const { season } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 left-0 z-50 h-20 sm:h-24 py-5 bg-inherit text-inherit"
+  class="sticky top-0 left-0 z-50 flex items-center h-20 py-5 backdrop-blur-lg"
   id="header"
 >
   <nav
-    class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-5xl text-inherit"
+    class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-5xl w-full items-center"
   >
-    <div class="flex items-center gap-4 shrink-0">
-      <a
-        href="/"
-        class="ignore"
-        aria-label="Logo of Samrith Shankar - an S inside a squircle"
-      >
-        <Logo />
-      </a>
+    <a
+      href="/"
+      class="ignore"
+      aria-label="Logo of Samrith Shankar - an S inside a squircle"
+    >
+      <Logo />
+    </a>
 
-      <SeasonsToggle season={season} client:load />
-    </div>
+    <!-- <SeasonsToggle season={season} client:load /> -->
 
-    <div class="flex items-center justify-center gap-2 text-inherit">
-      <ModesToggle client:load />
-      <BlogLink />
-    </div>
+    <ModesToggle client:load />
   </nav>
 </header>
+<style>
+  #header {
+    height: var(--header-height);
+  }
+</style>

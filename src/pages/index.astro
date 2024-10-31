@@ -1,29 +1,21 @@
 ---
-import CurrentlyWorking from "@/components/CurrentlyWorking.astro";
-import CurrentStack from "@/components/CurrentStack.astro";
+import FeaturedProjects from "@/components/Projects/FeaturedProjects.astro";
 
 import LatestBlogs from "@/components/LatestBlogs.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
 ---
 
 <RootLayout>
-  <div class="grid grid-flow-row grid-cols-1">
-    <div class="flex flex-col justify-center w-full h-full gap-2">
-      <div
-        class="flex flex-col justify-center w-full h-full gap-2 py-14 sm:py-28"
-      >
-        <h1 class="m-0">Samrith Shankar</h1>
-
-        <p class="max-w-sm m-0 mb-2">
-          TypeScript, DevX, CLI, tooling, open source.
-        </p>
-
-        <CurrentStack />
-      </div>
-
-      <CurrentlyWorking />
-
-      <LatestBlogs />
+  <div class="grid grid-flow-row gap-10">
+    <div class="py-10">
+      <h1 class="m-0">Samrith Shankar</h1>
+      <p class="max-w-sm m-0">
+        Full-stack, TypeScript, DevX, CLI, tooling, open source.
+      </p>
     </div>
+
+    <LatestBlogs />
+
+    <FeaturedProjects />
   </div>
 </RootLayout>

@@ -17,42 +17,25 @@ const season = SEASONS.at(month) as Seasons;
 ---
 
 <RootLayout title={title} description={description} season={season}>
-  <article class="pt-5 sm:pt-10 blog">
-    <div
-      class={cn(
-        "relative",
-        "p-10",
-        "bg-gradient-to-tr",
-        `bg-${season}/10`,
-        "rounded-lg",
-        "blog-title",
-      )}
-      data-post-reading-time={readingTime}
-    >
-      <h1
-        class={cn(
-          "sm:my-8",
-          "my-4",
-          "mb-2",
-          "sm:mb-4",
-          `text-${season}`,
-          "text-4xl",
-          "sm:text-5xl",
-        )}
+  <article class="grid grid-flow-row grid-cols-1 pt-5 sm:pt-10">
+    <h1 class={cn("text-4xl", "m-0", "mb-4")}>
+      {title}
+    </h1>
+
+    <div class="flex items-center gap-4">
+      <span
+        class="px-3 py-1 text-xs uppercase rounded-lg rounded-bl-md bg-season-text/10"
       >
-        {title}
-      </h1>
+        {readingTime}
+      </span>
+      /
       <FormattedDate date={pubDate} />
-      <div class="text-sm">
-        {
-          updatedDate && (
-            <div class="last-updated-on">
-              Last updated on <FormattedDate date={updatedDate} />
-            </div>
-          )
-        }
-      </div>
     </div>
-    <slot />
+
+    <hr class="mt-10 mb-20 border-dashed border-season-text/15" />
+
+    <div class="w-full shrink-1">
+      <slot />
+    </div>
   </article>
 </RootLayout>

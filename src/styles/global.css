@@ -1,15 +1,28 @@
 @import "./code-blocks.css";
-@import "./seasons.css";
+/* @import "./seasons.css"; */
 
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
 
-@layer base {
-  :root {
-    --icon-size: 32px;
+:root {
+  --season-primary: 0, 0, 0;
+  --season-text: 9, 9, 11;
+  --season-bg: 212, 212, 216;
+
+  &.dark {
+    --season-primary: 255, 255, 255;
+    --season-text: 212, 212, 216;
+    --season-bg: 9, 9, 11;
   }
 
+  --icon-size: 32px;
+  --header-height: 6rem;
+  --footer-height: 9rem;
+  --content-padding: 1rem;
+}
+
+@layer base {
   html {
     font-family: "Red Hat Text", serif;
     font-optical-sizing: auto;
@@ -26,8 +39,6 @@
     overflow: auto;
     background-color: rgba(var(--season-bg), 1);
     color: rgba(var(--season-text), 1);
-
-    @apply transition-colors duration-1000 ease-in-out;
   }
 
   h1,
@@ -79,8 +90,6 @@ a:not(.ignore):active {
   position: relative;
   color: rgba(var(--season-primary), 1);
   text-decoration: none;
-
-  @apply transition-colors duration-1000 ease-in-out;
 }
 
 a:not(.ignore) {
@@ -103,20 +112,4 @@ a[target="_blank"]:not(.ignore):after {
   color: rgba(var(--season-primary), 1);
   fill: rgba(var(--season-primary), 1);
   stroke: rgba(var(--season-primary), 1);
-}
-
-.blog-title:before {
-  content: attr(data-post-reading-time);
-
-  @apply absolute
-    right-0
-    top-0
-    text-xs
-    py-2
-    px-3 
-    rounded-tr-lg
-    rounded-bl-md
-    uppercase
-    bg-inherit
-    text-inherit;
 }

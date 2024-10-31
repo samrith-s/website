@@ -1,0 +1,35 @@
+---
+import ExternalLink from "../ExternalLink.astro";
+import ProjectBlock from "./ProjectBlock.astro";
+---
+
+<div class="grid grid-flow-row gap-6 p-6 rounded-2xl bg-season-text/5">
+  <div class="flex items-center justify-between gap-4">
+    <h2 class="m-0">Projects</h2>
+    <ExternalLink href="github.com/samrith-s" class="text-sm">
+      GitHub
+    </ExternalLink>
+  </div>
+
+  <div class="grid grid-flow-row gap-4 featured-projects sm:grid-flow-col">
+    <ProjectBlock
+      name="Hali"
+      description="A simple, declarative and efficient state management library for JavaScript."
+      repo="https://github.com/samrobbins85/hali"
+      tag="Currently building"
+    />
+
+    <ProjectBlock
+      name="Concurrent Tasks"
+      description="The only JavaScript task runner you need."
+      site="https://concurrent-tasks.js.org"
+      tag="Popular"
+    />
+  </div>
+</div>
+<style>
+  .featured-projects {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-rows: minmax(0, 1fr);
+  }
+</style>

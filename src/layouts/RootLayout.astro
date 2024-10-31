@@ -11,15 +11,17 @@ type Props = {
   description?: string;
   season?: Seasons;
   autoDetectSeason?: boolean;
+  noFooter?: boolean;
+  noMain?: boolean;
 };
 
-const { title, description, season } = Astro.props;
+const { title, description, season, noMain, noFooter } = Astro.props;
 
 const currentSeason = (season || CURRENT_SEASON) as Seasons;
 ---
 
-<!-- eslint-disable no-undef --><!doctype html>
-<html lang="en" data-season={currentSeason}>
+<!doctype html>
+<html lang="en">
   <head>
     <script is:inline>
       let mode = localStorage.getItem("mode");
@@ -39,17 +41,20 @@ const currentSeason = (season || CURRENT_SEASON) as Seasons;
       document.querySelector("html").classList.add(mode);
       window.MODE = mode;
     </script>
+
     <BaseHead title={title} description={description} />
-    <ClientRouter />
   </head>
-  <body class="bg-inherit">
-    <Header season={currentSeason} transition:persist="false" />
-    <main
-      class="relative z-[1] max-w-5xl mx-auto w-full bg-inherit px-4"
-      id="main"
-    >
-      <slot />
-    </main>
-    <Footer />
+  <body>
+    <Header season={currentSeason} transition:persist />
+    {
+      !noMain ? (
+        <main class="relative z-[1] max-w-5xl mx-auto w-full px-4" id="main">
+          <slot />
+        </main>
+      ) : (
+        <slot />
+      )
+    }
+    {!noFooter ? <Footer /> : null}
   </body>
 </html>

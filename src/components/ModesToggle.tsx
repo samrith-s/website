@@ -26,10 +26,7 @@ export function ModesToggle({ size = 18 }: ModeProps) {
         "px-3",
         "rounded-lg",
         "h-9",
-        "bg-black/5",
-        "dark:bg-white/5",
-        "transition-[background]",
-        "duration-1000",
+        "bg-season-text/5",
       )}
       onClick={() => {
         setMode((mode) => {

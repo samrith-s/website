@@ -1,0 +1,17 @@
+---
+import RootLayout from "@/layouts/RootLayout.astro";
+---
+
+<RootLayout noMain noFooter>
+  <div id="four-oh-four">
+    <h1 class="text-center">404</h1>
+    <p class="text-center text-season-text/50">
+      Not found. Head back <a href="/">home</a> to continue browsing.
+    </p>
+  </div>
+</RootLayout>
+<style>
+  #four-oh-four {
+    height: calc(100% - var(--header-height) - 50);
+  }
+</style>
