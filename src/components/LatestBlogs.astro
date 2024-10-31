@@ -22,7 +22,9 @@ const havePosts = posts.length > 0;
               date={post.data.pubDate}
             />
             <div class="w-full">
-              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              <a class="ignore" href={`/blog/${post.slug}`}>
+                {post.data.title}
+              </a>
             </div>
           </div>
         ))}

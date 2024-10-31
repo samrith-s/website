@@ -93,7 +93,7 @@ a:not(.ignore):active {
 }
 
 a:not(.ignore) {
-  border-bottom: 1px dashed transparent;
+  border-bottom: 1px dashed rgba(var(--season-primary), 0.5);
 
   &:hover {
     border-bottom-color: rgba(var(--season-primary), 1);
