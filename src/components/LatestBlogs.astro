@@ -3,15 +3,17 @@ import { getCollection } from "astro:content";
 import { cn } from "../utils/cn";
 import { SEASONS } from "../consts";
 
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const initialPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const posts = [initialPosts.at(0), initialPosts.at(1), initialPosts.at(2)];
 ---
 
-<div class="grid mt-10">
+<div class="grid mt-5 sm:mt-20">
   <div class="flex items-center justify-between gap-10">
-    <h2 class="inline">Latest blogs</h2>
-    <a href="/blog" class="text-sm">Read more &RightArrow;</a>
+    <h2 class="m-0">Blogs</h2>
+    <a href="/blog" class="text-sm shrink-0">Read more &RightArrow;</a>
   </div>
 
   <div
@@ -19,34 +21,42 @@ const posts = (await getCollection("blog"))
   >
     {
       posts.map((post) => {
-        const season = SEASONS.at(new Date(post.data.pubDate).getMonth());
+        if (post) {
+          const season = SEASONS.at(new Date(post.data.pubDate).getMonth());
+
+          return (
+            <a
+              class={cn(
+                "relative",
+                "p-4",
+                "rounded-lg",
+                "group",
+                "ignore",
+                "bg-season-text/5",
+                "transition-[background]",
+                "duration-1000",
+                "min-h-44",
+              )}
+              href={`/blog/${post.slug}`}
+            >
+              <div class="w-full h-full px-6 py-4 rounded-md">
+                <span
+                  class={`absolute transition-[opacity,transform] duration-500 -translate-x-2 opacity-0 bottom-4 right-4 group-hover:opacity-100 group-hover:translate-x-0 text-${season} text-bold`}
+                >
+                  &RightArrow;
+                </span>
+
+                <h3 class={cn("m-0", "font-normal")}>{post.data.title}</h3>
+                <p class="m-0 mt-2 text-season-text/50 transition-colors duration-1000 line-clamp-2">
+                  {post.data.description}
+                </p>
+              </div>
+            </a>
+          );
+        }
 
         return (
-          <a
-            class={cn(
-              "relative",
-              "p-4",
-              "rounded-lg",
-              "group",
-              "ignore",
-              "bg-season-text/5",
-              "transition-colors",
-              "duration-1000",
-            )}
-            href={`/blog/${post.slug}`}
-          >
-            <div class="w-full h-full px-6 py-4 rounded-md">
-              <span
-                class={`absolute transition-[opacity,transform] -translate-x-2 opacity-0 bottom-4 right-4 group-hover:opacity-100 group-hover:translate-x-0 text-${season} text-bold`}
-              >
-                &RightArrow;
-              </span>
-              <h5 class={cn("m-0", `text-${season}`)}>{post.data.title}</h5>
-              <p class="m-0 mt-2 text-season-text/50 transition-colors duration-1000">
-                {post.data.description}
-              </p>
-            </div>
-          </a>
+          <div class="bg-neutral-400/5 dark:bg-neutral-600/5 transition-colors duration-1000 rounded-lg min-h-44" />
         );
       })
     }

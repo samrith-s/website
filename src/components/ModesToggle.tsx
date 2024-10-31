@@ -32,7 +32,6 @@ export function ModesToggle({ size = 18 }: ModeProps) {
         "duration-1000",
       )}
       onClick={() => {
-        console.log("on click called....");
         setMode((mode) => {
           const newMode = mode === Modes.LIGHT ? Modes.DARK : Modes.LIGHT;
           localStorage.setItem("mode", newMode);

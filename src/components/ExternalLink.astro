@@ -4,9 +4,10 @@ import { cn } from "../utils/cn";
 type Props = {
   href?: string;
   emphasize?: boolean;
+  class?: string;
 };
 
-const { href, emphasize } = Astro.props;
+const { href, emphasize, class: classNames } = Astro.props;
 ---
 
 <a
@@ -19,6 +20,7 @@ const { href, emphasize } = Astro.props;
     "gap-0.5",
     "shrink-0",
     emphasize && "font-bold",
+    classNames,
   )}
 >
   <slot />
