@@ -8,14 +8,13 @@ import { SeasonsToggle } from "./SeasonToggle";
 type Props = {
   season?: Seasons;
   mode?: Modes;
-  detectedSeason?: boolean;
 };
 
-const { season, mode, detectedSeason } = Astro.props;
+const { season, mode } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 left-0 z-50 h-24 py-5 bg-inherit text-inherit"
+  class="sticky top-0 left-0 z-50 h-20 sm:h-24 py-5 bg-inherit text-inherit"
   id="header"
 >
   <nav
@@ -26,7 +25,7 @@ const { season, mode, detectedSeason } = Astro.props;
         <Logo />
       </a>
 
-      <SeasonsToggle season={season} detected={detectedSeason} client:load />
+      <SeasonsToggle season={season} client:load />
     </div>
 
     <div class="flex items-center justify-center gap-2 text-inherit">

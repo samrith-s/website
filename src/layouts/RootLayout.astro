@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -15,14 +15,6 @@ type Props = {
 
 const { title, description, season } = Astro.props;
 
-const seasonCookie = Astro.cookies.get("season");
-const seasonCookieValue = seasonCookie?.value as Seasons;
-const seasonDetected = !seasonCookieValue;
-
-// const currentSeason = (season ||
-//   seasonCookieValue ||
-//   SEASONS[new Date().getMonth()]) as Seasons;
-
 const currentSeason = (season || CURRENT_SEASON) as Seasons;
 
 const modeCookie = Astro.cookies.get("mode");
@@ -33,16 +25,18 @@ const currentMode = (modeCookie?.value || "light") as Modes;
 <html lang="en" class={currentMode} data-season={currentSeason}>
   <head>
     <BaseHead title={title} description={description} />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="bg-inherit">
     <Header
       season={currentSeason}
       mode={currentMode}
-      detectedSeason={seasonDetected}
       transition:persist="false"
     />
-    <main class="relative z-[1] max-w-5xl mx-auto w-full bg-inherit" id="main">
+    <main
+      class="relative z-[1] max-w-5xl mx-auto w-full bg-inherit px-4"
+      id="main"
+    >
       <slot />
     </main>
     <Footer />

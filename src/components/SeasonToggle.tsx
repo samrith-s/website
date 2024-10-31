@@ -13,11 +13,8 @@ export type SeasonsToggleProps = {
 export function SeasonsToggle({
   season: seasonProp = Seasons.SUMMER,
   size = 24,
-  detected: detectedProp,
 }: SeasonsToggleProps) {
   const [season, setSeason] = useState<Seasons>(seasonProp);
-  const [detected, setDetected] = useState<boolean>(!!detectedProp);
-  console.log("season:", seasonProp);
 
   const handleClick = () => {
     let newSeason = season;
@@ -37,7 +34,6 @@ export function SeasonsToggle({
 
     document.documentElement.dataset.season = newSeason;
 
-    setDetected(newSeason === CURRENT_SEASON);
     setSeason(newSeason);
   };
 
@@ -53,6 +49,8 @@ export function SeasonsToggle({
         "cursor-pointer",
         "transition-colors",
         "duration-1000",
+        "sm:text-base",
+        "text-xs",
       )}
       onClick={handleClick}
     >
@@ -125,7 +123,7 @@ export function SeasonsToggle({
       </span>
 
       <div className="grid grid-flow-row justify-items-start shrink-0">
-        <strong className="text-sm uppercase">{season}</strong>
+        <strong className="uppercase">{season}</strong>
       </div>
     </button>
   );
