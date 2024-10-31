@@ -4,7 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
-import { CURRENT_SEASON, Modes, Seasons, SEASONS } from "../consts";
+import { CURRENT_SEASON, Seasons } from "../consts";
 
 type Props = {
   title?: string;
@@ -40,7 +40,7 @@ const currentSeason = (season || CURRENT_SEASON) as Seasons;
       window.MODE = mode;
     </script>
     <BaseHead title={title} description={description} />
-    <!-- <ClientRouter /> -->
+    <ClientRouter />
   </head>
   <body class="bg-inherit">
     <Header season={currentSeason} transition:persist="false" />
