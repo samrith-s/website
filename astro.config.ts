@@ -13,12 +13,18 @@ import remarkToc from "remark-toc";
 import react from "@astrojs/react";
 import { remarkReadingTime } from "./plugins/remark-reading-time";
 
+import vercel from "@astrojs/vercel/serverless";
+
 export default defineConfig({
   site: "https://samrith.dev",
   output: "server",
+  adapter: vercel({
+    edgeMiddleware: true,
+  }),
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkToc()],
   },
+
   integrations: [
     expressiveCode({
       themes: ["ayu-dark"],
