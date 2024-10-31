@@ -2,21 +2,20 @@
 import type { CollectionEntry } from "astro:content";
 
 import FormattedDate from "../components/FormattedDate.astro";
-import RootLayout from "./RootLayout.astro";
 import { Seasons, SEASONS } from "../consts";
 import { cn } from "../utils/cn";
+import RootLayout from "./RootLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
-  readingTime: string;
+  readingTime?: string;
 };
 
 const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 
-console.log("props:", Astro.props);
+console.log("reading time:", readingTime);
 
 const month = new Date(pubDate).getMonth();
 const season = SEASONS.at(month) as Seasons;
-console.log("season:", season);
 ---
 
 <RootLayout title={title} description={description} season={season}>

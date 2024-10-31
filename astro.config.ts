@@ -11,7 +11,6 @@ import expressiveCode from "astro-expressive-code";
 import remarkToc from "remark-toc";
 
 import react from "@astrojs/react";
-import { remarkReadingTime } from "./plugins/remark-reading-time";
 
 import vercel from "@astrojs/vercel/serverless";
 
@@ -22,7 +21,7 @@ export default defineConfig({
     edgeMiddleware: true,
   }),
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkToc()],
+    remarkPlugins: [remarkToc()],
   },
 
   integrations: [
