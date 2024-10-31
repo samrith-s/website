@@ -2,8 +2,6 @@
 import { cn } from "../utils/cn";
 import ExternalLink from "./ExternalLink.astro";
 import GitHubIcon from "./Icons/GitHubIcon.astro";
-import HammerIcon from "./Icons/HammerIcon.astro";
-import TypeScriptIcon from "./Icons/TypeScriptIcon.astro";
 ---
 
 <div
@@ -13,11 +11,9 @@ import TypeScriptIcon from "./Icons/TypeScriptIcon.astro";
     "items-center",
     "gap-2",
     "rounded-xl",
-    // "shadow-lg",
     "w-full",
-    "aspect-video",
-    "bg-black/5",
-    "dark:bg-white/5",
+    "bg-white/25",
+    "dark:bg-black/25",
     "transition-[background]",
     "duration-1000",
     "p-8",
@@ -25,19 +21,18 @@ import TypeScriptIcon from "./Icons/TypeScriptIcon.astro";
   )}
 >
   <span
-    class="px-2 py-1 text-xs font-bold bg-season/20 rounded-lg justify-self-end"
+    class="px-2 py-2 text-xs font-bold bg-season/20 rounded-lg justify-self-end"
   >
-    <HammerIcon />
     Currently building
   </span>
 
   <div class="text-2xl font-bold">Hali</div>
 
-  <p>
+  <p class="m-0">
     A simple, declarative and efficient state management library for JavaScript.
   </p>
 
-  <div class="flex items-center gap-2 self">
+  <div class="flex items-center gap-2 self mt-4">
     <ExternalLink
       href="https://github.com/samrith-s/hali"
       class="inline-flex items-center gap-2 justify-self-stretch justify-center ignore text-sm dark:bg-white/5 bg-black/5 rounded-lg px-4 py-2 transition-[background] duration-1000 ease-in-out"
