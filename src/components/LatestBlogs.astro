@@ -25,23 +25,24 @@ const posts = (await getCollection("blog"))
           <a
             class={cn(
               "relative",
-              "p-1",
+              "p-4",
               "rounded-lg",
               "group",
               "ignore",
-              "bg-white/10",
-              "dark:bg-black/10",
+              "bg-season-text/5",
+              "transition-colors",
+              "duration-1000",
             )}
             href={`/blog/${post.slug}`}
           >
             <div class="w-full h-full px-6 py-4 rounded-md">
               <span
-                class={`absolute transition-[opacity,transform] translate-y-2 opacity-0 top-2 right-2 group-hover:opacity-100 group-hover:translate-y-0 text-${season} text-bold`}
+                class={`absolute transition-[opacity,transform] -translate-x-2 opacity-0 bottom-4 right-4 group-hover:opacity-100 group-hover:translate-x-0 text-${season} text-bold`}
               >
-                &UpperRightArrow;
+                &RightArrow;
               </span>
               <h5 class={cn("m-0", `text-${season}`)}>{post.data.title}</h5>
-              <p class="m-0 mt-2 text-season-text/50">
+              <p class="m-0 mt-2 text-season-text/50 transition-colors duration-1000">
                 {post.data.description}
               </p>
             </div>
