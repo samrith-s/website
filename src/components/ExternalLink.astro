@@ -1,0 +1,25 @@
+---
+import { cn } from "../utils/cn";
+
+type Props = {
+  href?: string;
+  emphasize?: boolean;
+};
+
+const { href, emphasize } = Astro.props;
+---
+
+<a
+  href={href}
+  rel="noopener noreferrer"
+  target="_blank"
+  class={cn(
+    "inline-flex",
+    "items-center",
+    "gap-0.5",
+    "shrink-0",
+    emphasize && "font-bold",
+  )}
+>
+  <slot />
+</a>

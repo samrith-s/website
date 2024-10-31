@@ -1,0 +1,111 @@
+@import "./code-blocks.css";
+@import "./seasons.css";
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+html {
+  font-family: "Red Hat Text", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(var(--season-bg), 1);
+  color: rgba(var(--season-text), 1);
+
+  @apply transition-colors duration-1000 ease-in-out;
+}
+
+body {
+  width: 100vw;
+  height: 100%;
+  overflow: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "League Spartan", sans-serif;
+  font-weight: bold;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  @apply my-8;
+}
+
+h1 {
+  @apply text-5xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-3xl;
+}
+
+h4 {
+  @apply text-2xl;
+}
+
+h5 {
+  @apply text-xl;
+}
+
+h6 {
+  @apply text-lg;
+}
+
+p {
+  @apply my-5;
+}
+
+#header {
+  min-height: var(--header-height);
+}
+
+#footer {
+  min-height: var(--footer-height);
+}
+
+#main {
+  padding: var(--content-padding);
+}
+
+a:not(.ignore),
+a:not(.ignore):visited,
+a:not(.ignore):active {
+  position: relative;
+  color: rgba(var(--season-primary), 1);
+  text-decoration: none;
+
+  @apply transition-colors duration-1000 ease-in-out;
+}
+
+a:not(.ignore) {
+  border-bottom: 1px dashed transparent;
+
+  &:hover {
+    border-bottom-color: rgba(var(--season-primary), 1);
+  }
+}
+
+a[target="_blank"]:not(.ignore):after {
+  content: "↖︎";
+  font-size: 0.75rem;
+  display: inline-block;
+  transform: scaleX(-1);
+  font-size: 0.6rem;
+}
+
+.logo {
+  color: rgba(var(--season-primary), 1);
+  fill: rgba(var(--season-primary), 1);
+  stroke: rgba(var(--season-primary), 1);
+}

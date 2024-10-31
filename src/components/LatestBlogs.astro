@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import { cn } from "../utils/cn";
+import { SEASONS } from "../consts";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<div class="grid mt-10">
+  <div class="flex items-center justify-between gap-10">
+    <h2 class="inline">Latest blogs</h2>
+    <a href="/blog" class="text-sm">Read more &RightArrow;</a>
+  </div>
+
+  <div
+    class="grid grid-rows-1 gap-4 mt-10 cursor-pointer grid-auto-cols sm:grid-cols-3"
+  >
+    {
+      posts.map((post) => {
+        const season = SEASONS.at(new Date(post.data.pubDate).getMonth());
+
+        return (
+          <a
+            class={cn(
+              "relative",
+              "p-1",
+              "rounded-lg",
+              "group",
+              "ignore",
+              "bg-white/10",
+              "dark:bg-black/10",
+            )}
+            href={`/blog/${post.slug}`}
+          >
+            <div class="w-full h-full px-6 py-4 rounded-md">
+              <span
+                class={`absolute transition-[opacity,transform] translate-y-2 opacity-0 top-2 right-2 group-hover:opacity-100 group-hover:translate-y-0 text-${season} text-bold`}
+              >
+                &UpperRightArrow;
+              </span>
+              <h5 class={cn("m-0", `text-${season}`)}>{post.data.title}</h5>
+              <p class="m-0 mt-2 text-season-text/50">
+                {post.data.description}
+              </p>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</div>

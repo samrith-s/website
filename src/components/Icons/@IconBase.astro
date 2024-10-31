@@ -1,0 +1,48 @@
+---
+import { cn } from "../../utils/cn";
+
+export type Icon = {
+  size?: number;
+  description?: string;
+  class?: string;
+};
+
+type Props = {
+  description?: string;
+  class?: string;
+};
+
+const { description } = Astro.props;
+---
+
+<span class={cn("group/ico", "relative", Astro.props.class)}>
+  {
+    !!description && (
+      <span
+        class={cn(
+          "absolute",
+          "-top-2",
+          "left-1/2",
+          "-translate-x-1/2",
+          "-translate-y-[100%]",
+          "text-sm",
+          "bg-black",
+          "text-white",
+          "dark:bg-white",
+          "dark:text-black",
+          "py-1",
+          "px-2",
+          "rounded-lg",
+          "shadow-md",
+          "opacity-0",
+          "group-hover/ico:opacity-100",
+          "transition-[opacity,transform]",
+          "z-[999]",
+        )}
+      >
+        {description}
+      </span>
+    )
+  }
+  <slot />
+</span>

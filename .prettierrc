@@ -1,0 +1,18 @@
+{
+  "semi": true,
+  "arrowParens": "always",
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "bracketSameLine": false,
+  "tabWidth": 2,
+  "useTabs": false,
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+---
+import ExternalLink from "../components/ExternalLink.astro";
+import AstroIcon from "../components/Icons/AstroIcon.astro";
+import PostgresIcon from "../components/Icons/PostgresIcon.astro";
+import GraphqlIcon from "../components/Icons/GraphqlIcon.astro";
+import ReactIcon from "../components/Icons/ReactIcon.astro";
+import RemixIcon from "../components/Icons/RemixIcon.astro";
+import TailwindIcon from "../components/Icons/TailwindIcon.astro";
+import TypeScriptIcon from "../components/Icons/TypeScriptIcon.astro";
+import NestJSIcon from "../components/Icons/NestJSIcon.astro";
+import LatestBlogs from "../components/LatestBlogs.astro";
+import RootLayout from "../layouts/RootLayout.astro";
+---
+
+<RootLayout>
+  <div
+    class="flex flex-col justify-center w-full h-full gap-2 pt-20 pb-5 intro"
+  >
+    <h1 class="m-0">Samrith Shankar</h1>
+
+    <p class="max-w-sm m-0 mb-2">
+      TypeScript, DevX, CLI, tooling, open source.
+    </p>
+
+    <p class="max-w-sm m-0 mb-2 text-sm">
+      Currently building <ExternalLink
+        emphasize
+        href="https://github.com/samrith-s/hali">Hali</ExternalLink
+      > - a super lightweight state management for JavaScript.
+    </p>
+
+    <div
+      class="flex flex-col self-start gap-1 px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 group"
+    >
+      <div class="text-sm">Current stack:</div>
+      <!-- Typescript -->
+      <div class="flex gap-2">
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <TypeScriptIcon description="TypeScript" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <ReactIcon description="React" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <RemixIcon description="Remix" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <AstroIcon description="Astro" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <TailwindIcon description="Tailwind" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <NestJSIcon description="NestJS" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <GraphqlIcon description="GraphQL" />
+        </span>
+
+        <span
+          class="transition-opacity hover:!opacity-100 group-hover:opacity-50 duration-500"
+        >
+          <PostgresIcon description="Postgres" />
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <LatestBlogs />
+</RootLayout>

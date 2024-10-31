@@ -1,0 +1,7 @@
+.expressive-code {
+  @apply my-4;
+
+  figure.frame {
+    @apply shadow-none border-none;
+  }
+}

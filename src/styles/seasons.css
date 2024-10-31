@@ -1,0 +1,74 @@
+:root {
+  /** Summer colors */
+  --season-summer-primary: 243, 72, 72;
+  --season-summer-light-bg: 254, 242, 242;
+  --season-summer-light-text: 28, 25, 23;
+  --season-summer-dark-bg: 28, 25, 23;
+  --season-summer-dark-text: 245, 245, 244;
+
+  /** Monsoon colors */
+  --season-monsoon-primary: 22, 163, 74;
+  --season-monsoon-light-bg: 218, 232, 225;
+  --season-monsoon-light-text: 5, 46, 22;
+  --season-monsoon-dark-bg: 27, 32, 28;
+  --season-monsoon-dark-text: 220, 252, 231;
+
+  /** Winter colors */
+  --season-winter-primary: 22, 132, 199;
+  --season-winter-light-bg: 224, 242, 254;
+  --season-winter-light-text: 3, 21, 28;
+  --season-winter-dark-bg: 3, 21, 28;
+  --season-winter-dark-text: 224, 242, 254;
+
+  /** Generic season color */
+  --season-primary: 255, 255, 255;
+  --season-bg: 255, 255, 255;
+  --season-text: 255, 255, 255;
+
+  /* x: rgb(224, 242, 254); */
+  /* x: #fef2f2; */
+  /* x: #1d0303; */
+  /* x: #16a34a; */
+
+  --season-opacity: 1;
+
+  --header-height: 6rem;
+  --footer-height: 9rem;
+  --content-padding: 1rem;
+}
+
+/** Summer */
+[data-season="summer"] {
+  --season-primary: var(--season-summer-primary);
+  --season-bg: var(--season-summer-light-bg);
+  --season-text: var(--season-summer-light-text);
+
+  &.dark {
+    --season-bg: var(--season-summer-dark-bg);
+    --season-text: var(--season-summer-dark-text);
+  }
+}
+
+/** Monsoon */
+[data-season="monsoon"] {
+  --season-primary: var(--season-monsoon-primary);
+  --season-bg: var(--season-monsoon-light-bg);
+  --season-text: var(--season-monsoon-light-text);
+
+  &.dark {
+    --season-bg: var(--season-monsoon-dark-bg);
+    --season-text: var(--season-monsoon-dark-text);
+  }
+}
+
+/** Winter */
+[data-season="winter"] {
+  --season-primary: var(--season-winter-primary);
+  --season-bg: var(--season-winter-light-bg);
+  --season-text: var(--season-winter-light-text);
+
+  &.dark {
+    --season-bg: var(--season-winter-dark-bg);
+    --season-text: var(--season-winter-dark-text);
+  }
+}

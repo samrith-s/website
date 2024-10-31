@@ -1,0 +1,37 @@
+---
+import type { Modes, Seasons } from "../consts";
+import BlogLink from "./BlogLink.astro";
+import Logo from "./Logo.astro";
+import { ModesToggle } from "./ModesToggle";
+import { SeasonsToggle } from "./SeasonToggle";
+
+type Props = {
+  season?: Seasons;
+  mode?: Modes;
+  detectedSeason?: boolean;
+};
+
+const { season, mode, detectedSeason } = Astro.props;
+---
+
+<header
+  class="sticky top-0 left-0 z-50 h-24 py-5 bg-inherit text-inherit"
+  id="header"
+>
+  <nav
+    class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-5xl text-inherit"
+  >
+    <div class="flex items-center gap-4 shrink-0">
+      <a href="/" class="ignore">
+        <Logo />
+      </a>
+
+      <SeasonsToggle season={season} detected={detectedSeason} client:load />
+    </div>
+
+    <div class="flex items-center justify-center gap-2 text-inherit">
+      <ModesToggle mode={mode} client:load />
+      <BlogLink />
+    </div>
+  </nav>
+</header>

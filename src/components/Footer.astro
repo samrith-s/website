@@ -1,0 +1,22 @@
+---
+import ExternalLink from "./ExternalLink.astro";
+
+const today = new Date();
+---
+
+<footer
+  class="flex items-center justify-between w-full max-w-5xl gap-2 p-4 pt-20 pb-10 mx-auto text-sm"
+  id="footer"
+>
+  <span class="text-neutral-500">
+    &copy; {today.getFullYear()} Samrith Shankar. All rights reserved.
+  </span>
+
+  <div class="flex items-center gap-4">
+    <ExternalLink href="https://x.com/shankarsamrith">Twitter</ExternalLink>
+    <ExternalLink href="https://linkedin.com/in/samrith">
+      LinkedIn
+    </ExternalLink>
+    <ExternalLink href="https://github.com/samrith-s">GitHub</ExternalLink>
+  </div>
+</footer>

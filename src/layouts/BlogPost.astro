@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import FormattedDate from "../components/FormattedDate.astro";
+import RootLayout from "./RootLayout.astro";
+import { Seasons, SEASONS } from "../consts";
+import { cn } from "../utils/cn";
+
+type Props = CollectionEntry<"blog">["data"] & {
+  readingTime: string;
+};
+
+const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
+
+console.log("props:", Astro.props);
+
+const month = new Date(pubDate).getMonth();
+const season = SEASONS.at(month) as Seasons;
+console.log("season:", season);
+---
+
+<RootLayout title={title} description={description} season={season}>
+  <article class="pt-10 blog">
+    <div
+      class={cn("p-10", "bg-gradient-to-tr", `bg-${season}/10`, "rounded-lg")}
+      data-post-season={season}
+    >
+      <h1 class={cn("mb-4", `text-${season}`)}>{title}</h1>
+      {readingTime}
+      <FormattedDate date={pubDate} />
+      <div class="date">
+        {
+          updatedDate && (
+            <div class="last-updated-on">
+              Last updated on <FormattedDate date={updatedDate} />
+            </div>
+          )
+        }
+      </div>
+    </div>
+    <slot />
+  </article>
+</RootLayout>
