@@ -5,77 +5,67 @@
 @tailwind utilities;
 @tailwind components;
 
-html {
-  font-family: "Red Hat Text", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(var(--season-bg), 1);
-  color: rgba(var(--season-text), 1);
+@layer base {
+  html {
+    font-family: "Red Hat Text", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(var(--season-bg), 1);
+    color: rgba(var(--season-text), 1);
 
-  @apply transition-colors duration-1000 ease-in-out;
-}
+    @apply transition-colors duration-1000 ease-in-out;
+  }
 
-body {
-  width: 100vw;
-  height: 100%;
-  overflow: auto;
-}
+  body {
+    width: 100vw;
+    height: 100%;
+    overflow: auto;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "League Spartan", sans-serif;
-  font-weight: bold;
-  font-optical-sizing: auto;
-  font-style: normal;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "League Spartan", sans-serif;
+    font-weight: bold;
+    font-optical-sizing: auto;
+    font-style: normal;
 
-  @apply my-8;
-}
+    @apply my-8;
+  }
 
-h1 {
-  @apply text-5xl;
-}
+  h1 {
+    @apply text-5xl;
+  }
 
-h2 {
-  @apply text-4xl;
-}
+  h2 {
+    @apply text-4xl;
+  }
 
-h3 {
-  @apply text-3xl;
-}
+  h3 {
+    @apply text-3xl;
+  }
 
-h4 {
-  @apply text-2xl;
-}
+  h4 {
+    @apply text-2xl;
+  }
 
-h5 {
-  @apply text-xl;
-}
+  h5 {
+    @apply text-xl;
+  }
 
-h6 {
-  @apply text-lg;
-}
+  h6 {
+    @apply text-lg;
+  }
 
-p {
-  @apply my-5;
-}
-
-#header {
-  min-height: var(--header-height);
-}
-
-#footer {
-  min-height: var(--footer-height);
-}
-
-#main {
-  padding: var(--content-padding);
+  p {
+    @apply my-5;
+  }
 }
 
 a:not(.ignore),
@@ -108,4 +98,20 @@ a[target="_blank"]:not(.ignore):after {
   color: rgba(var(--season-primary), 1);
   fill: rgba(var(--season-primary), 1);
   stroke: rgba(var(--season-primary), 1);
+}
+
+.blog-title:before {
+  content: attr(data-post-reading-time);
+
+  @apply absolute
+    right-0
+    top-0
+    text-xs
+    py-2
+    px-3 
+    rounded-tr-lg
+    rounded-bl-md
+    uppercase
+    bg-inherit
+    text-inherit;
 }

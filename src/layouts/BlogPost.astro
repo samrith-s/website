@@ -12,22 +12,38 @@ type Props = CollectionEntry<"blog">["data"] & {
 
 const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 
-console.log("reading time:", readingTime);
-
 const month = new Date(pubDate).getMonth();
 const season = SEASONS.at(month) as Seasons;
 ---
 
 <RootLayout title={title} description={description} season={season}>
-  <article class="pt-10 blog">
+  <article class="pt-5 sm:pt-10 blog">
     <div
-      class={cn("p-10", "bg-gradient-to-tr", `bg-${season}/10`, "rounded-lg")}
-      data-post-season={season}
+      class={cn(
+        "relative",
+        "p-10",
+        "bg-gradient-to-tr",
+        `bg-${season}/10`,
+        "rounded-lg",
+        "blog-title",
+      )}
+      data-post-reading-time={readingTime}
     >
-      <h1 class={cn("mb-4", `text-${season}`)}>{title}</h1>
-      {readingTime}
+      <h1
+        class={cn(
+          "sm:my-8",
+          "my-4",
+          "mb-2",
+          "sm:mb-4",
+          `text-${season}`,
+          "text-4xl",
+          "sm:text-5xl",
+        )}
+      >
+        {title}
+      </h1>
       <FormattedDate date={pubDate} />
-      <div class="date">
+      <div class="text-sm">
         {
           updatedDate && (
             <div class="last-updated-on">
