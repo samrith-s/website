@@ -13,8 +13,10 @@ import react from "@astrojs/react";
 
 import vercel from "@astrojs/vercel/serverless";
 
+const SITE = "https://samrith.dev";
+
 export default defineConfig({
-  site: "https://samrith.dev",
+  site: SITE,
   output: "server",
   adapter: vercel({
     edgeMiddleware: true,
@@ -40,7 +42,9 @@ export default defineConfig({
       plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
     }),
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) => page !== `${SITE}/404` && page !== `${SITE}/blog/dummy`,
+    }),
     tailwind(),
     react(),
   ],
