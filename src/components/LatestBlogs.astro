@@ -1,7 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { SEASONS } from "@/consts";
-import { cn } from "@/utils/cn";
 import FormattedDate from "./FormattedDate.astro";
 
 const posts = (await getCollection("blog"))
@@ -22,7 +20,7 @@ const havePosts = posts.length > 0;
               date={post.data.pubDate}
             />
             <div class="w-full">
-              <a class="ignore" href={`/blog/${post.slug}`}>
+              <a class="ignore-active" href={`/blog/${post.slug}`}>
                 {post.data.title}
               </a>
             </div>

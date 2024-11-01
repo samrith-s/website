@@ -100,6 +100,10 @@ a:not(.ignore) {
   }
 }
 
+a.ignore-active {
+  border-bottom-color: transparent;
+}
+
 a[target="_blank"]:not(.ignore):after {
   content: "↖︎";
   font-size: 0.75rem;
