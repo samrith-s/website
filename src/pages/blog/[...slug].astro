@@ -5,8 +5,14 @@ import { calculateReadingTime } from "@/utils/calculate-reading-time";
 
 const { slug } = Astro.params;
 
-const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
-const post = posts.find((p) => p.slug === slug) as CollectionEntry<"blog">;
+const posts = await getCollection("blog");
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const post = posts.find((p) => p.slug === slug)!;
+
+console.log("post:", post);
+if (!post) {
+  return Astro.redirect("/404");
+}
 
 type Props = CollectionEntry<"blog">;
 
