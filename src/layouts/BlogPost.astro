@@ -10,7 +10,7 @@ type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: string;
 };
 
-const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
+const { title, description, pubDate, readingTime } = Astro.props;
 
 const month = new Date(pubDate).getMonth();
 const season = SEASONS.at(month) as Seasons;

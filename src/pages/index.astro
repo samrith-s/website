@@ -3,9 +3,14 @@ import FeaturedProjects from "@/components/Projects/FeaturedProjects.astro";
 
 import LatestBlogs from "@/components/LatestBlogs.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
+import { SITE_SUBLINE } from "@/consts";
 ---
 
-<RootLayout>
+<RootLayout
+  og={{
+    description: SITE_SUBLINE,
+  }}
+>
   <div class="grid grid-flow-row gap-10">
     <div class="py-10">
       <h1 class="m-0">Samrith Shankar</h1>
