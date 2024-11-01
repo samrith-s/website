@@ -31,7 +31,7 @@ export default defineConfig({
   },
   integrations: [
     expressiveCode({
-      themes: ["ayu-dark"],
+      themes: ["vesper"],
       frames: {
         extractFileNameFromCode: false,
         removeCommentsWhenCopyingTerminalFrames: true,
