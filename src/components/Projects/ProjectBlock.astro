@@ -47,7 +47,7 @@ const { name, description, repo, site, tag } = Astro.props;
 
   <div class="flex items-center gap-2 mt-4 self">
     <ExternalLink
-      href={repo}
+      href={repo || site}
       class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-lg justify-self-stretch ignore bg-season-text/5"
     >
       {
