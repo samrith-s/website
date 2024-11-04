@@ -84,6 +84,29 @@
   p {
     @apply my-5;
   }
+
+  ul {
+    @apply pl-5 list-disc;
+  }
+
+  code:not(.expressive-code pre > code) {
+    @apply py-0.5 
+      px-2 
+      rounded-lg 
+      text-[0.85em] 
+      bg-season-text/5 
+      dark:bg-season-text/10
+      text-season;
+  }
+
+  blockquote {
+    @apply relative pl-4 my-5 italic;
+
+    &:before {
+      content: "";
+      @apply absolute top-0 bottom-0 left-0 w-1 rounded-lg bg-season/50;
+    }
+  }
 }
 
 a:not(.ignore),

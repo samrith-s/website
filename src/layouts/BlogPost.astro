@@ -18,7 +18,7 @@ const season = SEASONS.at(month) as Seasons;
 
 <RootLayout title={title} description={description} season={season}>
   <article class="grid grid-flow-row grid-cols-1 pt-5 sm:pt-10">
-    <h1 class={cn("text-4xl", "m-0", "mb-4")}>
+    <h1 class={cn("m-0", "mb-4")}>
       {title}
     </h1>
 
@@ -34,7 +34,7 @@ const season = SEASONS.at(month) as Seasons;
 
     <hr class="mt-10 mb-20 border-dashed border-season-text/15" />
 
-    <div class="w-full shrink-1">
+    <div class="w-full shrink-1 post">
       <slot />
     </div>
   </article>
