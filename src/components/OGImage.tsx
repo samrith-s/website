@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from "react";
 
-import { SITE_SUBLINE, SITE_TITLE } from "../consts";
+import { SITE_TITLE } from "../consts";
 
 export type OGImageProps = {
   title?: string;
@@ -42,9 +41,9 @@ function OGImage({ title, description }: OGImageProps) {
         <h1
           style={{
             margin: 0,
-            lineHeight: "5rem",
+            lineHeight: "3rem",
             fontFamily: '"redhattext"',
-            fontSize: "5.5rem",
+            fontSize: "3.5rem",
           }}
         >
           {title || SITE_TITLE}
