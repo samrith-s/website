@@ -89,10 +89,6 @@
     @apply my-5;
   }
 
-  ul {
-    @apply pl-5 list-disc;
-  }
-
   code:not(.expressive-code pre > code) {
     @apply py-0.5 
       px-2 
@@ -109,6 +105,28 @@
     &:before {
       content: "";
       @apply absolute top-0 bottom-0 left-0 w-1 rounded-lg bg-season/50;
+    }
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul,
+  ol {
+    @apply pl-5 my-5;
+
+    > ul,
+    > ol {
+      @apply my-0;
+    }
+
+    > li {
+      @apply my-2;
     }
   }
 }
