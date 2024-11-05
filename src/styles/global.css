@@ -42,6 +42,10 @@
     color: rgba(var(--season-text), 1);
   }
 
+  code {
+    font-family: "Fira Code", monospace !important;
+  }
+
   h1,
   h2,
   h3,
