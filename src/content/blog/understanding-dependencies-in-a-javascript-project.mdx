@@ -1,0 +1,183 @@
+---
+title: Understanding depedencies in a JavaScript project
+description: What are dependencies and how to decide between dependencies, devDependencies, peerDependencies and optionalDependencies?
+pubDate: "2024-11-04"
+---
+
+import ExternalLink from "@/components/ExternalLink.astro";
+import Admonition from "@/components/Admonition.astro";
+
+Every project in JavaScript has to deal with complex dependency management. Be it `depedencies`, `devDependencies`, `peerDependencies`, or `optionalDependencies`. Let us disect them.
+
+## Decoding `package.json` dependencies
+
+Your project's typical `package.json` file looks like this:
+
+```json title="package.json" {4} {8}
+{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1"
+  }
+}
+```
+
+It has become common practise to separate dependencies into `dependencies` and `devDependencies`. The general understanding - The former are required for the project to run, while the latter are only needed during development.
+
+### The myth behind `devDependencies`
+
+A lot of developers insist on separating dependencies into `dependencies` and `devDependencies`. But is it really necessary?
+
+**The answer is no.**
+
+Sure - It makes it easier to bifurcate what is needed for the project to run in production versus only for development. But in reality, splitting the dependencies is very important only if you are building a library or a package that will be consumed by other projects.
+
+## Understanding with examples
+
+Let us look at a few examples for the differences between building a React app and a library.
+
+### Building a React app
+
+If you were building a React app, then the `package.json` would look something like this:
+
+```json title="package.json" {"Prod":4,5} {"Dev":8,9}
+{
+  "name": "my-awesome-react-app",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1"
+  }
+}
+```
+
+For the app to run on the user's browser, you need `react` and `react-dom` to both be bundled into the JavaScript that is downloaded by the client.
+
+You can separate `eslint` and `prettier` as `devDependencies` because they are only needed during development. But even if you move them to `dependencies`, it won't affect the app's functionality or the bundle size.
+
+<Admonition type="caution">
+  Bundle size depends on whether you import any of the packages into your final
+  client bundle or not. For example, if you import `eslint` into the client
+  codem it will be bundled into the final JavaScript file.
+</Admonition>
+
+```json title="package.json" ins={6,7} del={10,11}
+{
+  "name": "my-awesome-react-app",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1"
+  }
+}
+```
+
+The install step for the app would be super straightforward:
+
+```bash
+npm install
+```
+
+### Building a React library
+
+Now, if you were building a library, say a React component library, then the `package.json` would look something like this:
+
+```json title="package.json" {4,7-8,} {11-14}
+{
+  "name": "my-awesome-react-library",
+  "dependencies": {
+    "framer-motion": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
+```
+
+What this means is that the library will not bundle `react` and `react-dom` into the final JavaScript file. Instead, if you are consuming the library, you are expected to provide these dependencies.
+
+So you will run your install command like this:
+
+```bash
+npm install my-awesome-react-library react react-dom
+```
+
+You would've noticed that `react` and `react-dom` are also added to `devDependencies`. This is because they are needed during development to build and test the library.
+
+### Optional dependencies
+
+Now assuming the React library also provided some performance monitoring capabilities. The code for the same is already part of the library. But in order to enable it, it might need an additional dependency (ex. `performance-monitoring-library`).
+
+In this case, the `package.json` for the library would look like this:
+
+```json title="package.json" {4,7-8} {11-14} {17}
+{
+  "name": "my-awesome-react-library",
+  "dependencies": {
+    "framer-motion": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "optionalDependencies": {
+    "performance-monitoring-library": "^1.0.0"
+  }
+}
+```
+
+Within the library, we can check if `performance-monitoring-library` is available and enable the performance monitoring feature. If it is not available, the library will still work as expected.
+
+For if you are using the performance monitoring feature, your installation step will change to:
+
+```bash ins="performance-monitoring-library"
+npm install my-awesome-react-library react react-dom performance-monitoring-library
+```
+
+## Rule of thumb for dependencies
+
+Apart from library authors, most of us will fall in the first category where we are making this decision while building an app. But as a rule of thumb:
+
+### For an app
+
+- Put all my dependencies in `dependencies`
+- Separating them into `devDependencies` is _nice_, but optional
+
+### For a library
+
+- Does my library need it only for development?
+  - Put it in `devDependencies`
+- Does my library need it for production?
+  - Will my library provide the dependency implcitly?
+    - Put it in `dependencies`
+  - Will my library expect the consumer to provide the dependency?
+    - Put it in `peerDependencies` and `devDependencies`
+  - Does my library need it for production but it is not mandatory?
+    - Put it in `optionalDependencies`
