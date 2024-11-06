@@ -1377,7 +1377,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^5.1.2":
+"@rollup/pluginutils@npm:^5.1.3":
   version: 5.1.3
   resolution: "@rollup/pluginutils@npm:5.1.3"
   dependencies:
@@ -1519,6 +1519,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@shikijs/core@npm:1.22.2":
+  version: 1.22.2
+  resolution: "@shikijs/core@npm:1.22.2"
+  dependencies:
+    "@shikijs/engine-javascript": "npm:1.22.2"
+    "@shikijs/engine-oniguruma": "npm:1.22.2"
+    "@shikijs/types": "npm:1.22.2"
+    "@shikijs/vscode-textmate": "npm:^9.3.0"
+    "@types/hast": "npm:^3.0.4"
+    hast-util-to-html: "npm:^9.0.3"
+  checksum: 10c0/fbcfb33489817a7589ec91d7fac3b93ee0e4e81a7a41589e1c1d993c5195130c194aa17669c81c7a690e63275dce9ce380867503a901ee50fe6517a0777d6209
+  languageName: node
+  linkType: hard
+
 "@shikijs/engine-javascript@npm:1.22.1":
   version: 1.22.1
   resolution: "@shikijs/engine-javascript@npm:1.22.1"
@@ -1527,6 +1541,17 @@ __metadata:
     "@shikijs/vscode-textmate": "npm:^9.3.0"
     oniguruma-to-js: "npm:0.4.3"
   checksum: 10c0/6bc16d4dfa829d8cb0e236b7a0a6fdd3f8c75493ff6ce08f3f677155fbce7ab4492f3e9695cd19ae638585999c41b3a4f0834b2f26c91cce70cc1b3c4f2572b9
+  languageName: node
+  linkType: hard
+
+"@shikijs/engine-javascript@npm:1.22.2":
+  version: 1.22.2
+  resolution: "@shikijs/engine-javascript@npm:1.22.2"
+  dependencies:
+    "@shikijs/types": "npm:1.22.2"
+    "@shikijs/vscode-textmate": "npm:^9.3.0"
+    oniguruma-to-js: "npm:0.4.3"
+  checksum: 10c0/7ec537700382be561122343b0ab954c19e9a706998517eb767359468458ca28c95e9e46769e096e95b14e04feecd167230aaf864e81323cc3d596365a24a9545
   languageName: node
   linkType: hard
 
@@ -1540,6 +1565,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@shikijs/engine-oniguruma@npm:1.22.2":
+  version: 1.22.2
+  resolution: "@shikijs/engine-oniguruma@npm:1.22.2"
+  dependencies:
+    "@shikijs/types": "npm:1.22.2"
+    "@shikijs/vscode-textmate": "npm:^9.3.0"
+  checksum: 10c0/892c8ffc68ad614158bc9ddb394c03e4228122ec62152e4707f51ddd0f1eac1c75ccc0f05310c615e562fa505ea682b8f92f7f35ed127bc8a13b8655c489864b
+  languageName: node
+  linkType: hard
+
 "@shikijs/types@npm:1.22.1":
   version: 1.22.1
   resolution: "@shikijs/types@npm:1.22.1"
@@ -1547,6 +1582,16 @@ __metadata:
     "@shikijs/vscode-textmate": "npm:^9.3.0"
     "@types/hast": "npm:^3.0.4"
   checksum: 10c0/85e31422c22b3c99f339114fb982dd276bde4355c8641d4b17551cad5815493121876f4f221b1dae9971ce14901cb58a0c529ae0d55610cecba774bd6ffbe9cd
+  languageName: node
+  linkType: hard
+
+"@shikijs/types@npm:1.22.2":
+  version: 1.22.2
+  resolution: "@shikijs/types@npm:1.22.2"
+  dependencies:
+    "@shikijs/vscode-textmate": "npm:^9.3.0"
+    "@types/hast": "npm:^3.0.4"
+  checksum: 10c0/278fd42dfe0b5aae8fbcca64861099ebe590deb53012a8ee3d17de7709b649a5629c40bd50a444191bfaeb7487d8f643f1391bfc95555801b5968eaa8bcc5cf6
   languageName: node
   linkType: hard
 
@@ -2454,18 +2499,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^5.0.0-beta.5":
-  version: 5.0.0-beta.5
-  resolution: "astro@npm:5.0.0-beta.5"
+"astro@npm:^5.0.0-beta.7":
+  version: 5.0.0-beta.7
+  resolution: "astro@npm:5.0.0-beta.7"
   dependencies:
     "@astrojs/compiler": "npm:^2.10.3"
     "@astrojs/internal-helpers": "npm:0.4.1"
     "@astrojs/markdown-remark": "npm:6.0.0-beta.2"
     "@astrojs/telemetry": "npm:3.1.0"
     "@oslojs/encoding": "npm:^1.1.0"
-    "@rollup/pluginutils": "npm:^5.1.2"
+    "@rollup/pluginutils": "npm:^5.1.3"
     "@types/cookie": "npm:^0.6.0"
-    acorn: "npm:^8.12.1"
+    acorn: "npm:^8.14.0"
     aria-query: "npm:^5.3.2"
     axobject-query: "npm:^4.1.0"
     boxen: "npm:8.0.1"
@@ -2502,26 +2547,26 @@ __metadata:
     rehype: "npm:^13.0.2"
     semver: "npm:^7.6.3"
     sharp: "npm:^0.33.3"
-    shiki: "npm:^1.22.0"
-    tinyexec: "npm:^0.3.0"
+    shiki: "npm:^1.22.2"
+    tinyexec: "npm:^0.3.1"
     tsconfck: "npm:^3.1.4"
     unist-util-visit: "npm:^5.0.0"
     vfile: "npm:^6.0.3"
-    vite: "npm:6.0.0-beta.2"
+    vite: "npm:6.0.0-beta.6"
     vitefu: "npm:^1.0.3"
     which-pm: "npm:^3.0.0"
     xxhash-wasm: "npm:^1.0.2"
     yargs-parser: "npm:^21.1.1"
     yocto-spinner: "npm:^0.1.0"
     zod: "npm:^3.23.8"
-    zod-to-json-schema: "npm:^3.23.3"
+    zod-to-json-schema: "npm:^3.23.5"
     zod-to-ts: "npm:^1.2.0"
   dependenciesMeta:
     sharp:
       optional: true
   bin:
     astro: astro.js
-  checksum: 10c0/901da7ac4f5dfd1dd3e433b068eb86c6d1e0ec6b130236b1bc539fc76ea821a73b52e0a4142ef15208f0d1fe00d8540b3c7ee9a4ab0ff61bfb716a674f3ef85e
+  checksum: 10c0/bf4717ebbf2ab12577d69a5e90d5fcbe2d7a67e368a8ff66ca9aa1bc52ed5cf8b91b9c60f298652bc367529c44f50d0ef64d780db1d3859bb6560b0cee6b2f12
   languageName: node
   linkType: hard
 
@@ -7011,7 +7056,7 @@ __metadata:
     "@vercel/analytics": "npm:^1.3.2"
     "@vercel/og": "npm:^0.6.3"
     "@vercel/speed-insights": "npm:^1.0.14"
-    astro: "npm:^5.0.0-beta.5"
+    astro: "npm:^5.0.0-beta.7"
     astro-expressive-code: "npm:^0.37.1"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
@@ -8007,7 +8052,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^1.14.1, shiki@npm:^1.21.0, shiki@npm:^1.22.0":
+"shiki@npm:^1.14.1, shiki@npm:^1.21.0":
   version: 1.22.1
   resolution: "shiki@npm:1.22.1"
   dependencies:
@@ -8018,6 +8063,20 @@ __metadata:
     "@shikijs/vscode-textmate": "npm:^9.3.0"
     "@types/hast": "npm:^3.0.4"
   checksum: 10c0/4e18903687d6f18fdb439f3a215b1a5c53226a144bbcead2051044a5aae65a25cd767296ec8b200e4b6003239f50c2b3ca5891aebd93ff13fc4c959721cb2a34
+  languageName: node
+  linkType: hard
+
+"shiki@npm:^1.22.2":
+  version: 1.22.2
+  resolution: "shiki@npm:1.22.2"
+  dependencies:
+    "@shikijs/core": "npm:1.22.2"
+    "@shikijs/engine-javascript": "npm:1.22.2"
+    "@shikijs/engine-oniguruma": "npm:1.22.2"
+    "@shikijs/types": "npm:1.22.2"
+    "@shikijs/vscode-textmate": "npm:^9.3.0"
+    "@types/hast": "npm:^3.0.4"
+  checksum: 10c0/9b31497dc9c23e2d4e3b7674023b4d31ed650fb4d94dc339319c4fba742220acf030aa0899be64ddfb29936d346bf098f12687d2d8104f2b45ec006936639e57
   languageName: node
   linkType: hard
 
@@ -8493,7 +8552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyexec@npm:^0.3.0":
+"tinyexec@npm:^0.3.1":
   version: 0.3.1
   resolution: "tinyexec@npm:0.3.1"
   checksum: 10c0/11e7a7c5d8b3bddf8b5cbe82a9290d70a6fad84d528421d5d18297f165723cb53d2e737d8f58dcce5ca56f2e4aa2d060f02510b1f8971784f97eb3e9aec28f09
@@ -8896,28 +8955,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:6.0.0-beta.2":
-  version: 6.0.0-beta.2
-  resolution: "vite@npm:6.0.0-beta.2"
+"vite@npm:6.0.0-beta.6":
+  version: 6.0.0-beta.6
+  resolution: "vite@npm:6.0.0-beta.6"
   dependencies:
     esbuild: "npm:^0.24.0"
     fsevents: "npm:~2.3.3"
     postcss: "npm:^8.4.47"
-    rollup: "npm:^4.22.5"
+    rollup: "npm:^4.23.0"
   peerDependencies:
     "@types/node": ^18.0.0 || >=20.0.0
+    jiti: ">=1.21.0"
     less: "*"
     lightningcss: ^1.21.0
     sass: "*"
     sass-embedded: "*"
     stylus: "*"
     sugarss: "*"
-    terser: ^5.4.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
   dependenciesMeta:
     fsevents:
       optional: true
   peerDependenciesMeta:
     "@types/node":
+      optional: true
+    jiti:
       optional: true
     less:
       optional: true
@@ -8933,9 +8997,13 @@ __metadata:
       optional: true
     terser:
       optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/45b9d7517d5d7791b48ee4cd6625145a999cc3176e8cc01e895fd62cfdc915389b1e3ea91879409da7cbd84c7293cb1a71a78cfa10091d601ccea379a1667e95
+  checksum: 10c0/1cf4866080423e19c6b4e3ad461daf5c9bd3364890b19c37c78a42a4f8e3d9697a0baa4f30bbaf31beac4023893863fc6283927fda4227d890b2f9f2f282a871
   languageName: node
   linkType: hard
 
@@ -9519,7 +9587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod-to-json-schema@npm:^3.23.3":
+"zod-to-json-schema@npm:^3.23.5":
   version: 3.23.5
   resolution: "zod-to-json-schema@npm:3.23.5"
   peerDependencies:

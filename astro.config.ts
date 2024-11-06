@@ -1,17 +1,15 @@
-import mdx from "@astrojs/mdx";
 import { defineConfig } from "astro/config";
 
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-
 import tailwind from "@astrojs/tailwind";
+import vercel from "@astrojs/vercel/serverless";
+
+import expressiveCode from "astro-expressive-code";
 
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
-import expressiveCode from "astro-expressive-code";
-
-import react from "@astrojs/react";
-
-import vercel from "@astrojs/vercel/serverless";
 
 const SITE = "https://samrith.dev";
 
@@ -41,7 +39,9 @@ export default defineConfig({
       },
       plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
     }),
-    mdx(),
+    mdx({
+      extendMarkdownConfig: true,
+    }),
     sitemap({
       filter: (page) => page !== `${SITE}/404` && page !== `${SITE}/blog/dummy`,
     }),
