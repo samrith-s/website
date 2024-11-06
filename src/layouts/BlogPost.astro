@@ -5,12 +5,13 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import { Seasons, SEASONS } from "@/consts";
 import { cn } from "@/utils/cn";
 import RootLayout from "./RootLayout.astro";
+import ReadingTime from "@/components/ReadingTime.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: string;
 };
 
-const { title, description, pubDate, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 
 const month = new Date(pubDate).getMonth();
 const season = SEASONS.at(month) as Seasons;
@@ -23,14 +24,19 @@ const season = SEASONS.at(month) as Seasons;
     </h1>
 
     <div class="flex items-center gap-4">
-      <span
-        class="px-3 py-1 text-xs uppercase rounded-lg rounded-bl-md bg-season-text/10"
-      >
-        {readingTime}
-      </span>
+      <ReadingTime readingTime={readingTime} />
       /
       <FormattedDate date={pubDate} />
     </div>
+
+    {
+      !!updatedDate && (
+        <p class="mb-0 text-xs font-thin text-season-text/50">
+          Last updated at:
+          <FormattedDate date={updatedDate} />
+        </p>
+      )
+    }
 
     <hr class="mt-10 mb-20 border-dashed border-season-text/15" />
 

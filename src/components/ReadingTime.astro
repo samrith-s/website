@@ -1,0 +1,13 @@
+---
+type Props = {
+  readingTime?: string;
+};
+
+const { readingTime } = Astro.props;
+---
+
+<span
+  class="px-3 py-1 text-xs uppercase rounded-lg rounded-bl-md bg-season-text/10"
+>
+  {readingTime}
+</span>
