@@ -8,7 +8,7 @@
 :root {
   --season-primary: 0, 0, 0;
   --season-text: 9, 9, 11;
-  --season-bg: 212, 212, 216;
+  --season-bg: 250, 250, 250;
 
   &.dark {
     --season-primary: 255, 255, 255;
@@ -32,6 +32,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(var(--season-bg), 1);
+    scroll-behavior: smooth;
   }
 
   body {

@@ -31,7 +31,14 @@ export default defineConfig({
   },
   integrations: [
     expressiveCode({
-      themes: ["vesper"],
+      themeCssSelector: (theme) => {
+        console.log(theme.type);
+        return `.${theme.type}`;
+      },
+      themes: ["vesper", "one-light"],
+      styleOverrides: {
+        borderWidth: "0.1px",
+      },
       frames: {
         extractFileNameFromCode: false,
         removeCommentsWhenCopyingTerminalFrames: true,

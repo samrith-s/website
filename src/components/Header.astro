@@ -1,14 +1,33 @@
 ---
+import { cn } from "@/utils/cn";
 import Logo from "./Logo.astro";
 import { ModesToggle } from "./ModesToggle";
 ---
 
 <header
-  class="sticky top-0 left-0 z-50 flex items-center h-20 py-5 backdrop-blur-lg"
+  class={cn(
+    "sticky",
+    "top-0",
+    "left-0",
+    "z-50",
+    "flex",
+    "items-start",
+    "h-40",
+    "pt-10",
+    "pb-20",
+    "bg-gradient-to-b",
+    "from-season-bg",
+    "to-transparent",
+  )}
   id="header"
 >
+  <div
+    class={cn("absolute", "top-0", "left-0", "right-0", "bottom-0", "z-0")}
+    id="header-mask"
+  >
+  </div>
   <nav
-    class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-4xl w-full items-center"
+    class="grid grid-cols-[max-content,max-content] justify-between gap-0.5 px-4 mx-auto max-w-4xl w-full items-center z-10"
   >
     <a
       href="/"
@@ -24,7 +43,15 @@ import { ModesToggle } from "./ModesToggle";
   </nav>
 </header>
 <style>
-  #header {
-    height: var(--header-height);
+  #header-mask {
+    mask: linear-gradient(
+      rgba(var(--season-bg), 0.6) 40%,
+      rgba(var(--season-bg), 0.5) 50%,
+      rgba(var(--season-bg), 0.4) 60%,
+      rgba(var(--season-bg), 0.3) 70%,
+      rgba(var(--season-bg), 0.2) 80%,
+      rgba(var(--season-bg), 0.1) 90%,
+      rgba(var(--season-bg), 0) 100%
+    );
   }
 </style>
