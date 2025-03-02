@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwind from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 
 import expressiveCode from "astro-expressive-code";
@@ -29,6 +29,9 @@ export default defineConfig({
   experimental: {
     contentIntellisense: true,
   },
+  vite: {
+    plugins: [tailwind()],
+  },
   integrations: [
     expressiveCode({
       themeCssSelector: (theme) => {
@@ -52,7 +55,6 @@ export default defineConfig({
     sitemap({
       filter: (page) => page !== `${SITE}/404` && page !== `${SITE}/blog/dummy`,
     }),
-    tailwind(),
     react(),
   ],
 });

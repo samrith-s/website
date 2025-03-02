@@ -51,7 +51,7 @@ const currentSeason = (season || CURRENT_SEASON) as Seasons;
     <Header season={currentSeason} transition:persist />
     {
       !noMain ? (
-        <main class="relative z-[1] max-w-4xl mx-auto w-full px-4" id="main">
+        <main class="relative z-1 max-w-4xl mx-auto w-full px-4" id="main">
           <slot />
         </main>
       ) : (
