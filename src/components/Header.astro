@@ -12,8 +12,8 @@ import { ModesToggle } from "./ModesToggle";
     "z-50",
     "flex",
     "items-start",
-    "h-40",
-    "pt-10",
+    "h-30",
+    "pt-5",
     "pb-20",
     "bg-linear-to-b",
     "from-season-bg",
@@ -21,10 +21,12 @@ import { ModesToggle } from "./ModesToggle";
   )}
   id="header"
 >
-  <div
-    class={cn("absolute", "top-0", "left-0", "right-0", "bottom-0", "z-0")}
-    id="header-mask"
-  >
+  <div class={cn("absolute", "inset-0")} id="header-mask">
+    <div class="header-mask-item"></div>
+    <div class="header-mask-item"></div>
+    <div class="header-mask-item"></div>
+    <div class="header-mask-item"></div>
+    <div class="header-mask-item"></div>
   </div>
   <nav
     class="grid grid-cols-[max-content_max-content] justify-between gap-0.5 px-4 mx-auto max-w-4xl w-full items-center z-10"
@@ -43,15 +45,89 @@ import { ModesToggle } from "./ModesToggle";
   </nav>
 </header>
 <style>
+  @reference '../styles/global.css';
+
   #header-mask {
-    mask: linear-gradient(
-      rgba(var(--season-bg), 0.6) 40%,
-      rgba(var(--season-bg), 0.5) 50%,
-      rgba(var(--season-bg), 0.4) 60%,
-      rgba(var(--season-bg), 0.3) 70%,
-      rgba(var(--season-bg), 0.2) 80%,
-      rgba(var(--season-bg), 0.1) 90%,
-      rgba(var(--season-bg), 0) 100%
-    );
+    z-index: -1;
+
+    > .header-mask-item {
+      --blur-value: 0px;
+      --z-index: 1;
+
+      @apply absolute inset-0;
+
+      backdrop-filter: blur(var(--blur-value));
+      z-index: var(--z-index);
+
+      &:nth-child(1) {
+        --blur-value: 2px;
+        --z-index: 1;
+
+        mask-image: linear-gradient(
+          rgba(var(--season-bg), 1) 0%,
+          rgba(var(--season-bg), 1) 20%,
+          rgba(var(--season-bg), 1) 40%,
+          rgba(var(--season-bg), 1) 60%,
+          rgba(var(--season-bg), 1) 80%,
+          rgba(var(--season-bg), 0) 100%
+        );
+      }
+
+      &:nth-child(2) {
+        --blur-value: 4px;
+        --z-index: 2;
+
+        mask-image: linear-gradient(
+          rgba(var(--season-bg), 1) 0%,
+          rgba(var(--season-bg), 1) 20%,
+          rgba(var(--season-bg), 1) 40%,
+          rgba(var(--season-bg), 1) 60%,
+          rgba(var(--season-bg), 0) 80%,
+          rgba(var(--season-bg), 0) 100%
+        );
+      }
+
+      &:nth-child(3) {
+        --blur-value: 8px;
+        --z-index: 3;
+
+        mask-image: linear-gradient(
+          rgba(var(--season-bg), 1) 0%,
+          rgba(var(--season-bg), 1) 20%,
+          rgba(var(--season-bg), 1) 40%,
+          rgba(var(--season-bg), 0) 60%,
+          rgba(var(--season-bg), 0) 80%,
+          rgba(var(--season-bg), 0) 100%
+        );
+      }
+
+      &:nth-child(4) {
+        --blur-value: 16px;
+        --z-index: 4;
+
+        mask-image: linear-gradient(
+          rgba(var(--season-bg), 1) 0%,
+          rgba(var(--season-bg), 1) 20%,
+          rgba(var(--season-bg), 0) 40%,
+          rgba(var(--season-bg), 0) 60%,
+          rgba(var(--season-bg), 0) 80%,
+          rgba(var(--season-bg), 0) 100%
+        );
+      }
+
+      &:nth-child(5) {
+        --blur-value: 32px;
+        --z-index: 5;
+
+        mask-image: linear-gradient(
+          rgba(var(--season-bg), 1) 0%,
+          rgba(var(--season-bg), 0) 20%,
+          rgba(var(--season-bg), 0) 40%,
+          rgba(var(--season-bg), 0) 60%,
+          rgba(var(--season-bg), 0) 80%,
+          rgba(var(--season-bg), 0) 100%
+        );
+      }
+    }
   }
 </style>
