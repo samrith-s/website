@@ -1,8 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
+import { cn } from "@/utils/cn";
 
-const posts = (await getCollection("blog"))
+const posts = (
+  (await getCollection("blog")) as {
+    data: { pubDate: Date; title: string };
+    slug: string;
+  }[]
+)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .filter((p) => p.slug.toLowerCase().trim() !== "dummy");
 
@@ -11,19 +17,34 @@ const havePosts = posts.length > 0;
 
 {
   havePosts ? (
-    <div class="grid grid-flow-row gap-6">
-      <div class="grid grid-cols-1 gap-10 grid-flow-rows">
+    <div class="grid grid-flow-row gap-6 pt-10">
+      <h2 class="m-0">Blogs</h2>
+
+      <div class="grid grid-cols-1 gap-5 grid-flow-rows group">
         {posts.map((post) => (
-          <div class="flex flex-row-reverse items-start gap-6 sm:flex-row">
+          <div
+            class={cn(
+              "group-hover:opacity-50",
+              "hover:opacity-100",
+              "transition-opacity",
+              "grid",
+              "gap-6",
+              "sm:grid-cols-[max-content_1fr]",
+              "grid-cols-[1fr_max-content]",
+            )}
+          >
             <FormattedDate
-              class="text-season-text/50 shrink-0"
+              class="order-2 text-season-text/50 sm:order-1"
               date={post.data.pubDate}
             />
-            <div class="w-full">
-              <a class="ignore-active" href={`/blog/${post.slug}`}>
+            <span class="order-1 sm:order-2">
+              <a
+                class="transition-all ignore-active"
+                href={`/blog/${post.slug}`}
+              >
                 {post.data.title}
               </a>
-            </div>
+            </span>
           </div>
         ))}
       </div>

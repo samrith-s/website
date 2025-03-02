@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Genshi",
+    "description": "Simple, composable and effective state management for JavaScript.",
+    "site": "https://genshi.samrith.dev",
+    "tag": "New"
+  },
+  {
+    "name": "Concurrent Tasks",
+    "description": "The only JavaScript task runner you need.",
+    "site": "https://concurrent-tasks.samrith.dev",
+    "tag": "Popular"
+  }
+]

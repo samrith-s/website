@@ -1,35 +1,41 @@
 ---
-import ExternalLink from "../ExternalLink.astro";
+import { cn } from "@/utils/cn";
 import ProjectBlock from "./ProjectBlock.astro";
+
+import projects from "@/projects.json";
 ---
 
-<div class="grid grid-flow-row gap-6 mt-20 xp-6 xrounded-2xl xbg-season-text/5">
-  <div class="flex items-center justify-between gap-4">
-    <h2 class="m-0">Projects</h2>
-    <ExternalLink href="github.com/samrith-s" class="text-sm">
-      GitHub
-    </ExternalLink>
+<div class="grid grid-flow-row gap-6">
+  <div
+    class={cn("grid grid-cols-1", "mb-4", "grid-flow-rows", "rounded-2xl")}
+    id="projects"
+  >
+    {projects.map((prj, i) => <ProjectBlock {...prj} index={i} />)}
   </div>
 
-  <div class="grid grid-flow-row gap-4 featured-projects sm:grid-flow-col">
-    <ProjectBlock
-      name="Genshi"
-      description="Simple, composable and effective state management for JavaScript."
-      site="https://genshi.samrith.dev"
-      tag="New"
-    />
-
-    <ProjectBlock
-      name="Concurrent Tasks"
-      description="The only JavaScript task runner you need."
-      site="https://concurrent-tasks.samrith.dev"
-      tag="Popular"
-    />
-  </div>
+  <button
+    class="px-4 py-2 text-sm rounded-2xl justify-self-center bg-season-text/5"
+    id="prj-swap"
+  >
+    Swap &rightleftharpoons;
+  </button>
 </div>
-<style>
-  .featured-projects {
-    grid-auto-columns: minmax(0, 1fr);
-    grid-auto-rows: minmax(0, 1fr);
-  }
-</style>
+
+<script>
+  const projects = document.querySelectorAll("[data-project-index]");
+  const swap = document.getElementById("prj-swap");
+
+  const length = projects.length;
+
+  let currentActiveIndex = 0;
+
+  swap?.addEventListener(
+    "click",
+    function () {
+      projects[currentActiveIndex].setAttribute("data-project-active", "false");
+      currentActiveIndex = (currentActiveIndex - 1 + length) % length;
+      projects[currentActiveIndex].setAttribute("data-project-active", "true");
+    },
+    true,
+  );
+</script>

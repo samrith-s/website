@@ -8,6 +8,7 @@ type Props = {
   name: string;
   description: string;
   tag: string;
+  index: number;
 } & (
   | {
       repo: string;
@@ -19,41 +20,48 @@ type Props = {
     }
 );
 
-const { name, description, repo, site, tag } = Astro.props;
+const { name, description, tag, index, repo, site } = Astro.props;
 ---
 
 <div
   class={cn(
     "grid",
-    "grid-rows-[max-content,max-content,1fr,max-content]",
-    "gap-2",
+    "grid-rows-[max-content_1fr_max-content]",
+    "gap-4",
     "rounded-2xl",
-    "w-full",
-    "p-8",
+    "py-4",
+    "px-8",
     "relative",
-    "bg-season-text/5",
+    "self-stretch",
+    "bg-season/5",
+    "backdrop-blur-lg",
+    "transition-all",
+    "row-span-full",
+    "col-span-full",
+    "transition-all",
+    "project",
   )}
+  data-project-index={index}
+  data-project-active={!index}
 >
-  <span
-    class="px-2 py-2 text-xs font-bold rounded-lg bg-season/5 justify-self-end"
-    >{tag}</span
-  >
+  <div class="text-2xl font-bold shrink-0">{name}</div>
 
-  <div class="text-2xl font-bold">{name}</div>
+  <p class="m-0">{description}</p>
 
-  <p class="m-0">
-    {description}
-  </p>
-
-  <div class="flex items-center gap-2 mt-4 self">
+  <div class="flex items-center justify-end gap-2">
+    <span
+      class="px-2 py-2 text-xs font-bold rounded-lg bg-season/5 justify-self-end"
+    >
+      {tag}
+    </span>
     <ExternalLink
       href={repo || site}
-      class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-lg justify-self-stretch ignore bg-season-text/5"
+      class="inline-flex items-center justify-center gap-2 px-2 py-2 text-xs rounded-lg justify-self-stretch ignore bg-season-text/5"
     >
       {
         !!repo && (
           <>
-            <GitHubIcon />
+            <GitHubIcon size={16} />
             GitHub
           </>
         )
@@ -62,7 +70,7 @@ const { name, description, repo, site, tag } = Astro.props;
       {
         !!site && (
           <>
-            <GlobeIcon />
+            <GlobeIcon size={16} />
             Website
           </>
         )
@@ -70,3 +78,15 @@ const { name, description, repo, site, tag } = Astro.props;
     </ExternalLink>
   </div>
 </div>
+
+<style>
+  @reference "../../styles/global.css";
+
+  [data-project-active="true"] {
+    @apply opacity-100 scale-100 translate-y-0 z-10;
+  }
+
+  [data-project-active="false"] {
+    @apply opacity-50 scale-95 translate-y-4 z-0;
+  }
+</style>
