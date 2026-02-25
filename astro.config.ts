@@ -15,7 +15,7 @@ const SITE = "https://samrith.dev";
 
 export default defineConfig({
   site: SITE,
-  output: "server",
+  output: "static",
   adapter: vercel({
     edgeMiddleware: true,
     imageService: true,
@@ -53,6 +53,7 @@ export default defineConfig({
       extendMarkdownConfig: true,
     }),
     sitemap({
+      changefreq: "daily",
       filter: (page) => page !== `${SITE}/404` && page !== `${SITE}/blog/dummy`,
     }),
     react(),

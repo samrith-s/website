@@ -1,18 +1,17 @@
-export function getQueryStrings(url: string) {
-  const qs = url
-    .split("?")[1]
-    ?.split("&")
-    .reduce(
-      (a, p) => {
-        const [key, value] = p.split("=");
+export function getQueryStrings(
+  url: string,
+): Record<string, string | undefined> {
+  const queryString = url.split("?")[1];
+  if (!queryString) return {};
 
-        return {
-          ...a,
-          [key]: decodeURIComponent(value),
-        };
-      },
-      {} as Record<string, string | undefined>,
-    );
-
-  return qs;
+  return queryString.split("&").reduce(
+    (a, p) => {
+      const [key, value] = p.split("=");
+      return {
+        ...a,
+        [key]: value ? decodeURIComponent(value) : undefined,
+      };
+    },
+    {} as Record<string, string | undefined>,
+  );
 }

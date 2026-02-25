@@ -4,8 +4,10 @@ import type { APIRoute } from "astro";
 import { createOgImage } from "../components/OGImage";
 import { getQueryStrings } from "../utils/get-query-strings";
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ request }) => {
-  const qs = getQueryStrings(request.url);
+  const qs = getQueryStrings(request.url ?? "");
   const title = qs.title;
   const description = qs.description;
 

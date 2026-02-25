@@ -1,7 +1,7 @@
 ---
 import SpeedInsights from "@vercel/speed-insights/astro";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_SUBLINE } from "@/consts";
 
 import "@/styles/global.css";
 
@@ -10,25 +10,21 @@ type Props = {
   description?: string;
   image?: string;
   mode?: string;
-  og?: {
-    title?: string;
-    description?: string;
-  };
 };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title = SITE_TITLE, description, og } = Astro.props;
+const { title = SITE_TITLE, description = SITE_SUBLINE } = Astro.props;
 
 const image = encodeURI(
   [
     Astro.site,
-    `og.png`,
+    "og.png",
     "?",
     "title=",
-    og?.title || title,
+    title,
     "&description=",
-    og?.description || "samrith.dev",
+    description || "samrith.dev",
   ].join(""),
 );
 ---
