@@ -17,37 +17,30 @@ const havePosts = posts.length > 0;
 
 {
   havePosts ? (
-    <div class="grid grid-flow-row gap-6 pt-10">
-      <h2 class="m-0">Blogs</h2>
-
-      <div class="grid grid-cols-1 gap-5 grid-flow-rows group">
-        {posts.map((post) => (
-          <div
-            class={cn(
-              "group-hover:opacity-50",
-              "hover:opacity-100",
-              "transition-opacity",
-              "grid",
-              "gap-6",
-              "sm:grid-cols-[max-content_1fr]",
-              "grid-cols-[1fr_max-content]",
-            )}
-          >
-            <FormattedDate
-              class="order-2 text-season-text/50 sm:order-1"
-              date={post.data.pubDate}
-            />
-            <span class="order-1 sm:order-2">
-              <a
-                class="transition-all ignore-active"
-                href={`/blog/${post.slug}`}
-              >
-                {post.data.title}
-              </a>
-            </span>
-          </div>
-        ))}
-      </div>
+    <div class="grid grid-cols-1 gap-5 grid-flow-rows group">
+      {posts.map((post) => (
+        <div
+          class={cn(
+            "group-hover:opacity-50",
+            "hover:opacity-100",
+            "transition-opacity",
+            "grid",
+            "gap-6",
+            "sm:grid-cols-[max-content_1fr]",
+            "grid-cols-[1fr_max-content]",
+          )}
+        >
+          <FormattedDate
+            class="order-2 text-season-text/50 sm:order-1"
+            date={post.data.pubDate}
+          />
+          <span class="order-1 sm:order-2">
+            <a class="transition-all ignore-active" href={`/blog/${post.slug}`}>
+              {post.data.title}
+            </a>
+          </span>
+        </div>
+      ))}
     </div>
   ) : null
 }

@@ -1,7 +1,7 @@
-@import './code-blocks.css' layer(base);
+@import "./code-blocks.css" layer(base);
 /* @import "./seasons.css"; */
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../tailwind.config.mjs';
 
@@ -79,7 +79,7 @@
     font-optical-sizing: auto;
     font-style: normal;
 
-    @apply my-8;
+    @apply mt-12 mb-8;
   }
 
   h1 {
@@ -91,19 +91,19 @@
   }
 
   h3 {
-    @apply text-3xl;
-  }
-
-  h4 {
     @apply text-2xl;
   }
 
-  h5 {
+  h4 {
     @apply text-xl;
   }
 
-  h6 {
+  h5 {
     @apply text-lg;
+  }
+
+  h6 {
+    @apply text-base;
   }
 
   p {

@@ -1,6 +1,4 @@
 ---
-import FeaturedProjects from "@/components/Projects/FeaturedProjects.astro";
-
 import LatestBlogs from "@/components/LatestBlogs.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
 import { SITE_SUBLINE } from "@/consts";
@@ -27,15 +25,11 @@ import { cn } from "@/utils/cn";
       <div>
         <h1 class="m-0">Samrith Shankar</h1>
         <p class="max-w-sm m-0">
-          Full-stack, TypeScript, DevX, CLI, tooling, open source.
-        </p>
-        <p>
-          Featured projects <span class="hidden sm:inline">&rarr;</span><span
-            class="sm:hidden">&darr;</span>
+          Tinkering with AI and dev tooling. Currently building <a
+            href="https://hyperterse.com">Hyperterse</a
+          >.
         </p>
       </div>
-
-      <FeaturedProjects />
     </div>
 
     <LatestBlogs />
