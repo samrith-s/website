@@ -54,7 +54,8 @@ export default defineConfig({
     }),
     sitemap({
       changefreq: "daily",
-      filter: (page) => page !== `${SITE}/404` && page !== `${SITE}/blog/dummy`,
+      filter: (page) =>
+        page !== `${SITE}/404` && page !== `${SITE}/blog/dummy/`,
     }),
     react(),
   ],
