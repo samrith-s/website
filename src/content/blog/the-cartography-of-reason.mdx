@@ -1,0 +1,99 @@
+---
+title: The cartography of reason
+description: Quit being tired of your best reasoning getting lost in endless chat logs or messy notes.
+pubDate: "2026-02-09"
+---
+
+import Steps from "@/components/Steps.astro";
+import Step from "@/components/Step.astro";
+
+I've been experimenting with intent graphs for a few weeks now, and even though I'm just getting started, the shift in how I process information is massive. If you're tired of your best reasoning getting lost in endless chat logs or messy notes, here is why this framework worked for me and maybe can work for you.
+
+## We remember words, not reasoning
+
+Most of our work happens in conversation, but conversations are transient. We often remember the "what" (the topic) but forget the "why" (the reasoning) and the "how" (the process). Standard notes are just snapshots. Intent graphs, however, treat every step of a conversation as a durable node in a growing map of logic.
+
+> The secret sauce: Intent + Valence
+
+Instead of just logging what was said, you map the intent (the abstraction of what you are trying to do next) and the state/valence (the quality of that choice).
+
+- Intent: Not a transcript, but a concise, actionable focus (e.g., "identify root cause" or "compare database options").
+- State: A simple tri-valence label - `Positive`, `Neutral`, or `Negative`. This doesn't track your mood, it tracks whether a specific path is productive or a dead end.
+
+## The projected "Traversal Flow"
+
+Based on this foundational theory, here is how a typical problem-solving flow looks once you start thinking in intent graphs:
+
+<Steps>
+  <Step title="The Root (Entry Point)">
+    You start with a high-level goal, often labeled as `Neutral` because the path isn't clear yet.
+
+    - Intent: "Improve system performance."
+
+  </Step>
+
+  <Step title="Branching (exploring alternatives)">
+    Instead of picking one path, you map the plausible next steps. This preserves your options without forcing a premature commitment.
+
+    - Branch A (Neutral): "Profile hot paths"
+    - Branch B (Neutral): "Analyze workload"
+    - Branch C (Negative): "Buy more servers immediately" (labeled negative because it avoids the root cause)
+
+  </Step>
+
+  <Step title="Traversal (The Active Path)">
+    You follow a sequence of nodes. Each step is an operational or epistemic intent that moves you closer to a solution.
+
+    - Step: "Profile hot paths" → "Identify bottleneck in DB queries."
+
+  </Step>
+
+  <Step title="Resolution (The Method)">
+    The path ends when you reach a terminal node. You don't just fix the bug; you record the method as a reusable recipe for the next time this happens.
+
+    - Method: "Identify failing step → isolate variables → apply minimal fix → verify".
+
+  </Step>
+</Steps>
+
+## Stop confusing vibes with value -  why valence isn't sentiment
+
+If you want to build a high-signal memory of your reasoning, you have to stop tracking how people feel and start tracking how well they think. In the intent graph framework, we use valence to map the quality of a choice, and it is fundamentally different from sentiment.
+
+### Decision quality vs. emotional tone
+
+Sentiment tracks mood—whether a participant is happy, frustrated, or neutral. Valence (state) answers a purely logical question: "If we take this intent now, is it a productive move?".
+
+- `Positive`: A desirable or productive next step.
+- `Neutral`: A plausible step, but its productivity is unclear.
+- `Negative`: A poor choice that is risky, unproductive, or misaligned with the goal.
+
+### Locality over atmosphere
+
+Sentiment usually describes the "vibe" of a whole conversation. Valence is local to a specific node. It's a surgical label for a single choice at a single moment. You can have a very heated, "negative-sentiment" debate that results in a Positive valence intent because the choice itself moves the needle toward a resolution.
+
+### Avoiding the "Sentiment Leakage" trap
+
+The biggest failure mode in mapping reasoning is sentiment leakage—treating a participant's negative mood as a negative valence for their idea. This framework forces you to separate the two. A "negative" state in an intent graph isn't a "bad vibe"; it's an explicit signal that a path is a dead end or a distraction.
+
+### Logic is durable, mood is transient
+
+We don't build intent graphs to remember who was grumpy on a Tuesday. We build them to capture decision quality. By focusing on valence instead of sentiment, the graph becomes a structured memory of reasoning patterns that remains useful long after the emotional context of the conversation has faded.
+
+## How is this working out?
+
+The most obvious question is - how is this working out? To be fair, it has only been 2 weeks. But in these two weeks, there are a few things that I have noticed.
+
+1. **It captures the "Road not Taken"**: Most systems only record the final result. Intent graphs use branching to preserve alternative paths and choices, keeping the graph "honest" about the ambiguity you faced.
+
+2. **It builds collective memory**: Over time, the graph becomes a structured memory. You start seeing recurring patterns in how you solve problems.
+
+3. **The goal is the "Method"**: The "terminal node" of any path isn't just an answer; it's a `Method` - a reusable process you can apply to future problems.
+
+## The Bottom Line
+
+In just a few weeks, I've realized that I'm no longer just "chatting" or "notetaking." I am mapping a forest of reasoning. Every conversation is now an investment in a long-term, structured memory that makes my future self smarter.
+
+I am not only able to map my reasoning, but I am also able to connect it to my AI agents to quickly record and retrieve this information. This has also helped in not having to co-locate the graph within a project, and multiple projects can pull from it via an MCP server.
+
+Check out the [GitHub repository](https://github.com/hyperterse/intent-graphs) with literature on this and more information about this concept.
