@@ -9,9 +9,11 @@ import ReadingTime from "@/components/ReadingTime.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: string;
+  heroImage?: string;
 };
 
-const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, readingTime } =
+  Astro.props;
 
 const month = new Date(pubDate).getMonth();
 const season = SEASONS.at(month) as Seasons;
@@ -38,9 +40,32 @@ const season = SEASONS.at(month) as Seasons;
       )
     }
 
-    <hr class="mt-10 mb-20 border-dashed border-season-text/15" />
+    <!-- <hr class="mt-10 mb-20 border-dashed border-season-text/15" /> -->
 
-    <div class="w-full shrink-1 post">
+    <div class="w-full shrink-1 post mt-20">
+      {
+        !!heroImage && (
+          <div class="w-full aspect-video rounded-lg overflow-hidden bg-season/5 mb-20 border border-season-text/10" id="hero" data-hero-image={heroImage} data-title={title}>
+            <script>
+              const hero = document.getElementById("hero");
+
+              if(hero) {
+                const heroImg = document.createElement("img");
+                heroImg.alt = hero.dataset.title || "";
+                heroImg.src = hero.dataset.heroImage || "";
+                heroImg.classList.add("w-full", "h-full", "object-cover", "opacity-0", "transition-opacity", "duration-500");
+
+                heroImg.addEventListener("load", () => {
+                  heroImg.classList.remove("opacity-0");
+                }, { once: true })
+
+                hero.appendChild(heroImg);
+              }
+            </script>
+          </div>
+          
+        )
+      }
       <slot />
     </div>
   </article>

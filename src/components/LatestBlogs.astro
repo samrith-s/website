@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 
 const posts = (
   (await getCollection("blog")) as {
-    data: { pubDate: Date; title: string };
+    data: { pubDate: Date; title: string; hero?: string };
     slug: string;
   }[]
 )
