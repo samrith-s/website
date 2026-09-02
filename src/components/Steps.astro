@@ -1,7 +1,17 @@
 ---
-import { cn } from "@/utils/cn";
+// Numbering is handled with a CSS counter so steps stay correct no matter how
+// many <Step> children an author writes.
 ---
 
-<div class={cn("my-8 flex flex-col gap-0", "[counter-reset:step]")}>
+<div class="steps">
   <slot />
 </div>
+
+<style>
+  .steps {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    margin-block: 2em;
+  }
+</style>

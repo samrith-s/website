@@ -1,7 +1,27 @@
+/* Expressive Code ships its own chrome; these rules only reconcile its
+   spacing and line-number gutter with the site's reading rhythm. */
 .expressive-code {
-  @apply my-4;
+  margin-block: 1.75em;
+}
 
-  figure.frame {
-    @apply border-none shadow-none;
-  }
+.expressive-code figure.frame {
+  box-shadow: none;
+}
+
+.expressive-code .frame pre {
+  border: 0;
+}
+
+/* Line numbers should recede — they are reference, not content. */
+.expressive-code .gutter .ln {
+  color: color-mix(in oklab, var(--muted) 55%, transparent);
+}
+
+.expressive-code figcaption.header {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.expressive-code .copy button {
+  border-radius: 0.5rem;
 }

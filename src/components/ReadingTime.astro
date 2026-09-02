@@ -1,13 +1,21 @@
 ---
 type Props = {
   readingTime?: string;
+  class?: string;
 };
 
-const { readingTime } = Astro.props;
+const { readingTime, class: className } = Astro.props;
 ---
 
-<span
-  class="px-3 py-1 text-xs uppercase rounded-lg rounded-bl-md bg-season-text/10"
->
-  {readingTime}
-</span>
+{
+  !!readingTime && (
+    <span class:list={["reading-time", className]}>{readingTime}</span>
+  )
+}
+
+<style>
+  .reading-time {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+</style>

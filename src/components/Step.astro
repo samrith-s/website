@@ -1,6 +1,4 @@
 ---
-import { cn } from "@/utils/cn";
-
 type Props = {
   title: string;
 };
@@ -8,30 +6,95 @@ type Props = {
 const { title } = Astro.props;
 ---
 
-<div
-  class={cn(
-    "step",
-    "relative grid grid-cols-[auto_1fr] gap-x-5 gap-y-4 pb-6 last:pb-0",
-    "[counter-increment:step]",
-    "before:absolute before:left-3 before:top-6 before:-bottom-0 before:block before:w-0.5 before:rounded-sm before:bg-season-text/10",
-    "last:before:hidden",
-  )}
->
-  <div
-    class={cn(
-      "step-indicator",
-      "flex h-6 min-h-6 w-6 min-w-6 items-center justify-center rounded-full bg-season/15 text-xs font-semibold text-season",
-      "before:content-[counter(step)]",
-    )}
-    aria-hidden="true"
-  >
-  </div>
-  <div class="flex min-w-0 flex-col gap-1">
-    <h3 class="m-0">{title}</h3>
-    <div
-      class="m-0 text-[0.9375rem] leading-relaxed text-season-text/85 step-content"
-    >
+<div class="step">
+  <div class="step-dot" aria-hidden="true"></div>
+  <div class="step-body">
+    <h3 class="step-title">{title}</h3>
+    <div class="step-content">
       <slot />
     </div>
   </div>
 </div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .step {
+    counter-increment: step;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.15rem;
+    padding-bottom: 1.75rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  /* The connecting rail, hidden on the final step so the list ends cleanly. */
+  .step::before {
+    content: "";
+    position: absolute;
+    left: 0.78rem;
+    top: 1.9rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--clay) 30%, transparent),
+      color-mix(in oklab, var(--line) 80%, transparent)
+    );
+  }
+
+  .step:last-child::before {
+    display: none;
+  }
+
+  .step-dot {
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--clay);
+    background: color-mix(in oklab, var(--clay) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--clay) 28%, transparent);
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .step-dot::before {
+    content: counter(step);
+  }
+
+  .step-body {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .step-title {
+    margin: 0;
+    font-size: var(--text-step-1);
+    font-weight: 600;
+    letter-spacing: -0.018em;
+  }
+
+  .step-content {
+    font-size: 0.96em;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .step-content :global(> p) {
+    margin: 0;
+  }
+
+  .step-content :global(> p + p),
+  .step-content :global(> * + *) {
+    margin-top: 0.7em;
+  }
+</style>

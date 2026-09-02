@@ -1,6 +1,3 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
 export const SITE_TITLE = "Samrith Shankar";
 export const SITE_SUBLINE = "Tinkering with AI and dev tooling.";
 export const SITE_DESCRIPTION =
@@ -11,40 +8,26 @@ export enum Modes {
   DARK = "dark",
 }
 
-export enum Seasons {
-  SUMMER = "summer",
-  MONSOON = "monsoon",
-  WINTER = "winter",
-}
+export const SOCIALS = [
+  {
+    label: "Twitter",
+    href: "https://x.com/samrithshankar",
+    handle: "@samrithshankar",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/samrith",
+    handle: "in/samrith",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/samrith-s",
+    handle: "samrith-s",
+  },
+] as const;
 
-export const SEASONS = [
-  /**
-   * January - March
-   */
-  Seasons.WINTER,
-  Seasons.WINTER,
-  Seasons.WINTER,
-
-  /**
-   * April - June
-   */
-  Seasons.SUMMER,
-  Seasons.SUMMER,
-  Seasons.SUMMER,
-
-  /**
-   * July - October
-   */
-  Seasons.MONSOON,
-  Seasons.MONSOON,
-  Seasons.MONSOON,
-  Seasons.MONSOON,
-
-  /**
-   * November - December
-   */
-  Seasons.WINTER,
-  Seasons.WINTER,
-];
-
-export const CURRENT_SEASON = SEASONS[new Date().getMonth()];
+export const NOW = {
+  label: "Currently",
+  text: "Building Mitra",
+  href: "https://mitra.run",
+} as const;

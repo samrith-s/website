@@ -20,10 +20,48 @@ export default defineConfig({
   }),
   integrations: [
     expressiveCode({
+      // <html> carries `light` or `dark`, so key the themes off that.
       themeCssSelector: (theme) => `.${theme.type}`,
-      themes: ["vesper", "one-light"],
+      // Everforest keeps syntax in the same sage/earth family as the palette.
+      themes: ["everforest-dark", "everforest-light"],
       styleOverrides: {
-        borderWidth: "0.1px",
+        // Surfaces come from the site's own tokens so code blocks sit inside
+        // the design instead of importing a second palette.
+        borderColor: "var(--line)",
+        borderWidth: "1px",
+        borderRadius: "0.9rem",
+        codeBackground: "var(--paper-raised)",
+        codeFontFamily: "var(--font-mono)",
+        codeFontSize: "0.85rem",
+        codeLineHeight: "1.7",
+        codePaddingBlock: "1rem",
+        codePaddingInline: "1.15rem",
+        uiFontFamily: "var(--font-mono)",
+        uiFontSize: "0.75rem",
+        frames: {
+          editorTabBarBackground:
+            "color-mix(in oklab, var(--ink) 4%, transparent)",
+          editorActiveTabBackground: "var(--paper-raised)",
+          editorActiveTabIndicatorTopColor: "var(--clay)",
+          editorActiveTabIndicatorBottomColor: "transparent",
+          editorActiveTabBorderColor: "var(--line)",
+          editorTabBarBorderBottomColor: "var(--line)",
+          terminalBackground: "var(--paper-raised)",
+          terminalTitlebarBackground:
+            "color-mix(in oklab, var(--ink) 4%, transparent)",
+          terminalTitlebarBorderBottomColor: "var(--line)",
+          shadowColor: "transparent",
+        },
+        // Everforest's own marker colours are blue/green/red, which fight the
+        // warm palette. Re-tint them to clay / sage / rust.
+        textMarkers: {
+          markBackground: "color-mix(in oklab, var(--clay) 11%, transparent)",
+          markBorderColor: "color-mix(in oklab, var(--clay) 45%, transparent)",
+          insBackground: "color-mix(in oklab, var(--sage) 14%, transparent)",
+          insBorderColor: "color-mix(in oklab, var(--sage) 50%, transparent)",
+          delBackground: "color-mix(in oklab, var(--rust) 11%, transparent)",
+          delBorderColor: "color-mix(in oklab, var(--rust) 45%, transparent)",
+        },
       },
       frames: {
         extractFileNameFromCode: false,

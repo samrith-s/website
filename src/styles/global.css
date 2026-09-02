@@ -1,70 +1,154 @@
-@import "./code-blocks.css" layer(base);
-/* @import "./seasons.css"; */
-
 @import "tailwindcss";
+@import "./code-blocks.css" layer(components);
 
-@config '../../tailwind.config.mjs';
+/* The mode toggle writes `.dark` onto <html>, so drive the variant off that
+   rather than prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+/* ---------------------------------------------------------------------------
+   Palette — japandi: warm washi paper, sumi ink, a single clay accent.
+   Deliberately no cold greys; every neutral carries a little earth in it.
+   --------------------------------------------------------------------------- */
+:root {
+  --paper: #f4f0e7;
+  --paper-raised: #faf7f0;
+  --ink: #201d17;
+  --ink-soft: #4a4439;
+  --muted: #7a7264;
+  --line: #ded6c6;
+  --clay: #a65332;
+  --clay-soft: #c9714a;
+  --sage: #77876c;
+  --ochre: #96701f;
+  --rust: #9c3b2a;
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+  color-scheme: light;
 }
 
-@layer components {
+.dark {
+  --paper: #14120e;
+  --paper-raised: #1c1a15;
+  --ink: #efe9dc;
+  --ink-soft: #c3bbaa;
+  --muted: #928979;
+  --line: #2e2a22;
+  --clay: #d68a5c;
+  --clay-soft: #e0a078;
+  --sage: #91a283;
+  --ochre: #d3ab5c;
+  --rust: #e0765c;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-clay: var(--clay);
+  --color-clay-soft: var(--clay-soft);
+  --color-sage: var(--sage);
+  --color-ochre: var(--ochre);
+  --color-rust: var(--rust);
+
+  --font-display:
+    "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Fluid type scale, ~1.22 ratio. */
+  --text-step--1: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
+  --text-step-0: clamp(1.02rem, 0.99rem + 0.2vw, 1.125rem);
+  --text-step-1: clamp(1.2rem, 1.14rem + 0.34vw, 1.4rem);
+  --text-step-2: clamp(1.42rem, 1.3rem + 0.58vw, 1.75rem);
+  --text-step-3: clamp(1.7rem, 1.5rem + 1vw, 2.2rem);
+  --text-step-4: clamp(2.1rem, 1.7rem + 2vw, 3rem);
+  --text-step-5: clamp(2.5rem, 1.85rem + 3.4vw, 4.25rem);
+}
+
+@theme {
+  /* Reading measure — the single most important reader-friendliness knob. */
+  --container-measure: 68ch;
+  /* One editorial column for the whole site, only a little wider than the
+     measure, so the header, prose and any breakout image stay in agreement. */
+  --container-frame: 48rem;
+}
+
+/* Paper grain. Japandi leans on natural material texture, so a static,
+   very low-opacity fractal-noise wash sits over everything. */
+@layer base {
   :root {
-    --season-primary: 0, 0, 0;
-    --season-text: 9, 9, 11;
-    --season-bg: 250, 250, 250;
-
-    &.dark {
-      --season-primary: 255, 255, 255;
-      --season-text: 212, 212, 216;
-      --season-bg: 9, 9, 11;
-    }
-
-    --icon-size: 32px;
-    --header-height: 6rem;
-    --footer-height: 9rem;
-    --content-padding: 1rem;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    --header-h: 5.5rem;
   }
-}
 
-@layer base {
   html {
-    font-family: "Red Hat Text", sans-serif;
-    font-display: swap;
-    font-optical-sizing: auto;
-    font-style: normal;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(var(--season-bg), 1);
+    background-color: var(--paper);
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Must sit on the root: body's overflow propagates to the viewport, so
+       setting it there leaves body itself visible and nothing gets clipped.
+       `clip` (not `hidden`) keeps position: sticky working on the header. */
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   body {
-    width: 100vw;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(var(--season-bg), 1);
-    color: rgba(var(--season-text), 1);
+    /* Never 100vw — that overflows horizontally once a scrollbar appears. */
+    width: 100%;
+    min-height: 100svh;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-step-0);
+    line-height: 1.7;
+    font-optical-sizing: auto;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    hanging-punctuation: first last;
+    font-feature-settings: "cv05" 1;
   }
 
-  code {
-    font-family: "Fira Code", monospace !important;
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background-image: var(--grain);
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+  }
+
+  .dark body::after {
+    opacity: 0.055;
+    mix-blend-mode: screen;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--clay) 22%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
   h1,
@@ -73,124 +157,321 @@
   h4,
   h5,
   h6 {
-    font-family: "League Spartan", sans-serif;
-    font-display: swap;
-    font-weight: bold;
+    font-family: var(--font-display);
     font-optical-sizing: auto;
-    font-style: normal;
-
-    @apply mt-12 mb-8;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.1;
+    text-wrap: balance;
+    color: var(--ink);
   }
 
-  h1 {
-    @apply text-5xl;
+  p,
+  li {
+    text-wrap: pretty;
   }
 
-  h2 {
-    @apply text-4xl;
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+    font-feature-settings: normal;
   }
 
-  h3 {
-    @apply text-2xl;
+  /* Anchors need to clear the sticky header. */
+  :where(h1, h2, h3, h4, h5, h6)[id] {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
-  h4 {
-    @apply text-xl;
+  hr {
+    border: 0;
+    border-top: 1px solid var(--line);
   }
 
-  h5 {
-    @apply text-lg;
-  }
-
-  h6 {
-    @apply text-base;
-  }
-
-  p {
-    @apply my-5;
-  }
-
-  code:not(.expressive-code pre > code) {
-    @apply bg-season-text/5 dark:bg-season-text/10 text-season rounded-lg px-2 py-0.5 text-[0.85em];
-  }
-
-  blockquote {
-    @apply relative my-5 pl-4 italic;
-
-    &:before {
-      content: "";
-      @apply bg-season/50 absolute top-0 bottom-0 left-0 w-1 rounded-lg;
-    }
-  }
-
-  ul {
-    @apply list-disc;
-  }
-
-  ol {
-    @apply list-decimal;
-  }
-
-  ul,
-  ol {
-    @apply my-5 pl-5;
-
-    > ul,
-    > ol {
-      @apply my-0;
-    }
-
-    > li {
-      @apply my-2;
-    }
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
   }
 }
 
-a:not(.ignore),
-a:not(.ignore):visited,
-a:not(.ignore):active {
-  position: relative;
-  color: rgba(var(--season-primary), 1);
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+@utility rule {
+  /* A hairline that stops short of the full width — asymmetry as a wabi-sabi
+     nod, rather than a rule that runs edge to edge. */
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    var(--line) 0%,
+    var(--line) 62%,
+    color-mix(in oklab, var(--line) 35%, transparent) 88%,
+    transparent 100%
+  );
+}
+
+@utility eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility squircle {
+  border-radius: 1.25rem;
+  @supports (corner-shape: superellipse(2)) {
+    corner-shape: superellipse(2.2);
+    border-radius: 1.6rem;
+  }
+}
+
+@utility squircle-sm {
+  border-radius: 0.75rem;
+  @supports (corner-shape: superellipse(2)) {
+    corner-shape: superellipse(2.2);
+    border-radius: 0.95rem;
+  }
+}
+
+/* Understated link: colour shift only, for nav and chrome. */
+@utility link-quiet {
+  color: var(--ink-soft);
   text-decoration: none;
-}
-
-a:not(.ignore) {
-  border-bottom: 1px dashed rgba(var(--season-primary), 0.5);
-
+  transition:
+    color 200ms ease,
+    opacity 200ms ease;
   &:hover {
-    border-bottom-color: rgba(var(--season-primary), 1);
+    color: var(--clay);
   }
 }
 
-a.ignore-active {
-  border-bottom-color: transparent;
-}
+/* ---------------------------------------------------------------------------
+   Prose — the reading experience.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .prose {
+    font-size: var(--text-step-0);
+    line-height: 1.75;
+    color: var(--ink-soft);
 
-a[target="_blank"]:not(.ignore):after {
-  content: "↖︎";
-  font-size: 0.75rem;
-  display: inline-block;
-  transform: scaleX(-1);
-  font-size: 0.6rem;
-}
+    > * + * {
+      margin-top: 1.25em;
+    }
 
-.logo {
-  color: rgba(var(--season-primary), 1);
-  fill: rgba(var(--season-primary), 1);
-  stroke: rgba(var(--season-primary), 1);
-}
+    p {
+      margin-block: 0;
+    }
 
-aside.admonition {
-  &:before {
-    content: attr(data-tag);
-    @apply bg-season-text/5 dark:bg-season-text/10 -mt-1.5 -ml-1.5 justify-self-start rounded-md px-3 py-1 text-xs font-bold;
+    /* Asymmetric heading rhythm: a lot of air above, little below, so a
+       heading binds to the text it introduces. */
+    h2 {
+      font-size: var(--text-step-3);
+      margin-top: 2.75em;
+      margin-bottom: 0.6em;
+      position: relative;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: -1.15rem;
+      top: 0.62em;
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 999px;
+      background: var(--clay);
+    }
+
+    h3 {
+      font-size: var(--text-step-2);
+      margin-top: 2.1em;
+      margin-bottom: 0.5em;
+    }
+
+    h4 {
+      font-size: var(--text-step-1);
+      margin-top: 1.8em;
+      margin-bottom: 0.4em;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in oklab, var(--clay) 45%, transparent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.22em;
+      transition:
+        color 180ms ease,
+        text-decoration-color 180ms ease;
+    }
+
+    a:hover {
+      color: var(--clay);
+      text-decoration-color: var(--clay);
+    }
+
+    a[target="_blank"]::after {
+      content: "↗";
+      display: inline-block;
+      margin-left: 0.15em;
+      font-size: 0.72em;
+      color: var(--muted);
+      transition: transform 180ms ease;
+    }
+
+    a[target="_blank"]:hover::after {
+      color: var(--clay);
+      transform: translate(1px, -1px);
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    ul,
+    ol {
+      padding-left: 1.35em;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul > li {
+      position: relative;
+    }
+
+    ul > li::before {
+      content: "";
+      position: absolute;
+      left: -1.05em;
+      top: 0.72em;
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--clay) 65%, transparent);
+    }
+
+    ol {
+      list-style: decimal;
+    }
+
+    ol > li::marker {
+      color: var(--muted);
+      font-size: 0.9em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    li + li {
+      margin-top: 0.4em;
+    }
+
+    /* A statement, not a bar-on-the-left cliché. */
+    blockquote {
+      margin-block: 2em;
+      padding-left: 1.5em;
+      border-left: 1px solid color-mix(in oklab, var(--clay) 40%, transparent);
+      font-family: var(--font-display);
+      font-size: var(--text-step-2);
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: -0.018em;
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    blockquote p {
+      margin: 0;
+    }
+
+    /* Scoped to text containers on purpose: inside a heading a boxed chip
+       fractures the line, so headings get mono alone (below). */
+    :is(p, li, td, th, figcaption, blockquote) code {
+      font-size: 0.875em;
+      padding: 0.08em 0.28em;
+      border-radius: 0.3rem;
+      background: color-mix(in oklab, var(--ink) 5%, transparent);
+      color: var(--ink);
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) code {
+      font-size: 0.88em;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: inherit;
+    }
+
+    img {
+      border-radius: 0.9rem;
+      border: 1px solid var(--line);
+    }
+
+    figure {
+      margin-block: 2em;
+    }
+
+    figcaption {
+      margin-top: 0.75em;
+      font-size: var(--text-step--1);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    hr {
+      margin-block: 3em;
+      @apply rule;
+    }
   }
 
-  > p:first-of-type {
-    @apply mt-0;
+  /* Mode toggle lives in a React island, so it can't use scoped Astro styles. */
+  .mode-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    color: var(--ink-soft);
+    background: color-mix(in oklab, var(--ink) 5%, transparent);
+    border: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+    cursor: pointer;
+    transition:
+      color 220ms ease,
+      background-color 220ms ease,
+      border-color 220ms ease;
+
+    @apply squircle-sm;
+
+    &:hover {
+      color: var(--clay);
+      background: color-mix(in oklab, var(--clay) 10%, transparent);
+      border-color: color-mix(in oklab, var(--clay) 30%, transparent);
+    }
   }
 
-  > p:last-of-type {
-    @apply mb-0;
+  .mode-icon {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    transition:
+      opacity 260ms ease,
+      transform 260ms ease;
+
+    &[data-visible="false"] {
+      opacity: 0;
+      transform: rotate(-45deg) scale(0.6);
+    }
+
+    &[data-visible="true"] {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
   }
 }

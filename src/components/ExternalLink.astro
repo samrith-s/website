@@ -1,27 +1,31 @@
 ---
-import { cn } from "@/utils/cn";
-
 type Props = {
   href?: string;
   emphasize?: boolean;
   class?: string;
 };
 
-const { href, emphasize, class: classNames } = Astro.props;
+const { href, emphasize, class: className } = Astro.props;
 ---
 
 <a
   href={href}
   rel="noopener noreferrer"
   target="_blank"
-  class={cn(
-    "inline-flex",
-    "items-center",
-    "gap-0.5",
-    "shrink-0",
-    emphasize && "font-bold",
-    classNames,
-  )}
+  class:list={["external", emphasize && "external-strong", className]}
 >
   <slot />
 </a>
+
+<style>
+  .external {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .external-strong {
+    font-weight: 600;
+  }
+</style>

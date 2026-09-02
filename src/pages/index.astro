@@ -1,32 +1,163 @@
 ---
 import LatestBlogs from "@/components/LatestBlogs.astro";
+import Projects from "@/components/Projects.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
-import { cn } from "@/utils/cn";
+import { NOW } from "@/consts";
 ---
 
 <RootLayout>
-  <div class="grid grid-flow-row gap-10">
-    <div
-      class={cn(
-        "grid",
-        "gap-6",
-        "grid-rows-[max-content_max-content]",
-        "grid-cols-1",
-        "sm:grid-rows-1",
-        "sm:grid-cols-2",
-        "items-center",
-      )}
-    >
-      <div>
-        <h1 class="m-0">Samrith Shankar</h1>
-        <p class="max-w-sm m-0">
-          Tinkering with AI and dev tooling. Currently building <a
-            href="https://hyperterse.com">Hyperterse</a
-          >.
-        </p>
-      </div>
-    </div>
+  <section class="hero">
+    <!-- Two very soft, very low-opacity washes. Bohemian warmth as a
+         material, not as decoration you can point at. -->
+    <div class="wash wash-clay" aria-hidden="true"></div>
+    <div class="wash wash-sage" aria-hidden="true"></div>
 
-    <LatestBlogs />
-  </div>
+    <p class="eyebrow">Fullstack engineer · Engineering leader</p>
+
+    <h1 class="hero-name">Samrith Shankar</h1>
+
+    <p class="lede">
+      Tinkering with AI and dev tooling — mostly the unglamorous parts that
+      make everything else feel fast.
+    </p>
+
+    <a class="now" href={NOW.href} target="_blank" rel="noopener noreferrer">
+      <span class="now-dot" aria-hidden="true"></span>
+      <span class="now-label">{NOW.label}</span>
+      <span class="now-text">{NOW.text}</span>
+      <span class="now-arrow" aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <LatestBlogs />
+
+  <Projects />
 </RootLayout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .hero {
+    position: relative;
+    isolation: isolate;
+    padding-top: clamp(2.5rem, 1.5rem + 6vw, 5.5rem);
+    padding-bottom: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+  }
+
+  /* Radial gradients rather than blurred solids — a blurred box leaves a
+     faint visible ellipse edge, a gradient falls off cleanly. */
+  .wash {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .wash-clay {
+    top: -30%;
+    left: -35%;
+    width: 46rem;
+    aspect-ratio: 1.25;
+    background: radial-gradient(
+      closest-side ellipse,
+      color-mix(in oklab, var(--clay) 15%, transparent) 0%,
+      color-mix(in oklab, var(--clay) 7%, transparent) 45%,
+      transparent 100%
+    );
+  }
+
+  .wash-sage {
+    top: 5%;
+    right: -40%;
+    width: 38rem;
+    aspect-ratio: 1.1;
+    background: radial-gradient(
+      closest-side ellipse,
+      color-mix(in oklab, var(--sage) 14%, transparent) 0%,
+      color-mix(in oklab, var(--sage) 6%, transparent) 48%,
+      transparent 100%
+    );
+  }
+
+  .dark .wash-clay,
+  .dark .wash-sage {
+    opacity: 0.55;
+  }
+
+  .hero-name {
+    /* Bricolage carries a width axis; pulling it in slightly gives the
+       display size a bit more tension. */
+    font-size: var(--text-step-5);
+    font-stretch: 94%;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    margin-top: 0.7rem;
+    margin-bottom: 0;
+  }
+
+  .lede {
+    max-width: 34ch;
+    margin-top: 1.35rem;
+    font-size: var(--text-step-1);
+    line-height: 1.55;
+    letter-spacing: -0.012em;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .now {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 2.25rem;
+    padding: 0.5rem 0.95rem 0.5rem 0.8rem;
+    font-size: var(--text-step--1);
+    color: var(--ink-soft);
+    text-decoration: none;
+    background: color-mix(in oklab, var(--paper-raised) 70%, transparent);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+    transition:
+      border-color 220ms ease,
+      color 220ms ease,
+      transform 220ms ease;
+
+    @apply squircle-sm;
+
+    &:hover {
+      color: var(--ink);
+      border-color: color-mix(in oklab, var(--clay) 40%, transparent);
+      transform: translateY(-1px);
+    }
+  }
+
+  .now-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: var(--clay);
+    box-shadow: 0 0 0 0.2rem color-mix(in oklab, var(--clay) 18%, transparent);
+  }
+
+  .now-label {
+    font-size: 0.78em;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .now-text {
+    font-weight: 500;
+  }
+
+  .now-arrow {
+    color: var(--muted);
+    transition: transform 220ms ease;
+  }
+
+  .now:hover .now-arrow {
+    color: var(--clay);
+    transform: translate(2px, -2px);
+  }
+</style>

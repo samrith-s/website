@@ -1,133 +1,150 @@
 ---
-import { cn } from "@/utils/cn";
 import Logo from "./Logo.astro";
 import { ModesToggle } from "./ModesToggle";
 ---
 
-<header
-  class={cn(
-    "sticky",
-    "top-0",
-    "left-0",
-    "z-50",
-    "flex",
-    "items-start",
-    "h-30",
-    "pt-5",
-    "pb-20",
-    "bg-linear-to-b",
-    "from-season-bg",
-    "to-transparent",
-  )}
-  id="header"
->
-  <div class={cn("absolute", "inset-0")} id="header-mask">
-    <div class="header-mask-item"></div>
-    <div class="header-mask-item"></div>
-    <div class="header-mask-item"></div>
-    <div class="header-mask-item"></div>
-    <div class="header-mask-item"></div>
+<header id="header">
+  <!-- Layered progressive blur: five stacked masks so the page dissolves
+       upward into the paper instead of ending on a hard edge. -->
+  <div class="header-mask" aria-hidden="true">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
-  <nav
-    class="grid grid-cols-[max-content_max-content] justify-between gap-0.5 px-4 mx-auto max-w-4xl w-full items-center z-10"
-  >
+
+  <nav>
     <a
       href="/"
-      class="ignore"
-      aria-label="Logo of Samrith Shankar - an S inside a squircle"
+      class="logo-link"
+      aria-label="Samrith Shankar — home"
+      data-astro-prefetch
     >
       <Logo />
     </a>
 
-    <!-- <SeasonsToggle season={season} client:load /> -->
-
     <ModesToggle client:load />
   </nav>
 </header>
-<style>
-  @reference '../styles/global.css';
 
-  #header-mask {
+<style>
+  @reference "../styles/global.css";
+
+  #header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-start;
+    height: var(--header-h);
+    padding-top: 1.15rem;
+    padding-bottom: 3.5rem;
+    pointer-events: none;
+  }
+
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    max-width: var(--container-frame);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    pointer-events: auto;
+
+    @variant sm {
+      padding-inline: 2rem;
+    }
+  }
+
+  .logo-link {
+    display: inline-flex;
+    border-radius: 0.9rem;
+    transition: opacity 200ms ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .header-mask {
+    position: absolute;
+    inset: 0;
     z-index: -1;
 
-    > .header-mask-item {
-      --blur-value: 0px;
-      --z-index: 1;
-
-      @apply absolute inset-0;
-
-      backdrop-filter: blur(var(--blur-value));
-      z-index: var(--z-index);
-
-      &:nth-child(1) {
-        --blur-value: 2px;
-        --z-index: 1;
-
-        mask-image: linear-gradient(
-          rgba(var(--season-bg), 1) 0%,
-          rgba(var(--season-bg), 1) 20%,
-          rgba(var(--season-bg), 1) 40%,
-          rgba(var(--season-bg), 1) 60%,
-          rgba(var(--season-bg), 1) 80%,
-          rgba(var(--season-bg), 0) 100%
-        );
-      }
-
-      &:nth-child(2) {
-        --blur-value: 4px;
-        --z-index: 2;
-
-        mask-image: linear-gradient(
-          rgba(var(--season-bg), 1) 0%,
-          rgba(var(--season-bg), 1) 20%,
-          rgba(var(--season-bg), 1) 40%,
-          rgba(var(--season-bg), 1) 60%,
-          rgba(var(--season-bg), 0) 80%,
-          rgba(var(--season-bg), 0) 100%
-        );
-      }
-
-      &:nth-child(3) {
-        --blur-value: 8px;
-        --z-index: 3;
-
-        mask-image: linear-gradient(
-          rgba(var(--season-bg), 1) 0%,
-          rgba(var(--season-bg), 1) 20%,
-          rgba(var(--season-bg), 1) 40%,
-          rgba(var(--season-bg), 0) 60%,
-          rgba(var(--season-bg), 0) 80%,
-          rgba(var(--season-bg), 0) 100%
-        );
-      }
-
-      &:nth-child(4) {
-        --blur-value: 16px;
-        --z-index: 4;
-
-        mask-image: linear-gradient(
-          rgba(var(--season-bg), 1) 0%,
-          rgba(var(--season-bg), 1) 20%,
-          rgba(var(--season-bg), 0) 40%,
-          rgba(var(--season-bg), 0) 60%,
-          rgba(var(--season-bg), 0) 80%,
-          rgba(var(--season-bg), 0) 100%
-        );
-      }
-
-      &:nth-child(5) {
-        --blur-value: 32px;
-        --z-index: 5;
-
-        mask-image: linear-gradient(
-          rgba(var(--season-bg), 1) 0%,
-          rgba(var(--season-bg), 0) 20%,
-          rgba(var(--season-bg), 0) 40%,
-          rgba(var(--season-bg), 0) 60%,
-          rgba(var(--season-bg), 0) 80%,
-          rgba(var(--season-bg), 0) 100%
-        );
-      }
+    > div {
+      --blur: 0px;
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
     }
+
+    /* Each layer blurs harder but is masked to a shorter run, so the total
+       effect ramps smoothly rather than banding. */
+    > div:nth-child(1) {
+      --blur: 1px;
+      z-index: 1;
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 80%,
+        transparent 100%
+      );
+    }
+    > div:nth-child(2) {
+      --blur: 3px;
+      z-index: 2;
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 60%,
+        transparent 80%
+      );
+    }
+    > div:nth-child(3) {
+      --blur: 7px;
+      z-index: 3;
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 40%,
+        transparent 60%
+      );
+    }
+    > div:nth-child(4) {
+      --blur: 14px;
+      z-index: 4;
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 20%,
+        transparent 40%
+      );
+    }
+    > div:nth-child(5) {
+      --blur: 28px;
+      z-index: 5;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 20%);
+    }
+  }
+
+  /* A warm scrim under the blur so text passing beneath stays legible. */
+  .header-mask::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--paper) 0%,
+      color-mix(in oklab, var(--paper) 82%, transparent) 45%,
+      transparent 100%
+    );
   }
 </style>

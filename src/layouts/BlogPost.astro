@@ -2,71 +2,226 @@
 import type { CollectionEntry } from "astro:content";
 
 import FormattedDate from "@/components/FormattedDate.astro";
-import { Seasons, SEASONS } from "@/consts";
-import { cn } from "@/utils/cn";
-import RootLayout from "./RootLayout.astro";
 import ReadingTime from "@/components/ReadingTime.astro";
+import RootLayout from "./RootLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: string;
-  heroImage?: string;
 };
 
 const { title, description, pubDate, updatedDate, heroImage, readingTime } =
   Astro.props;
-
-const month = new Date(pubDate).getMonth();
-const season = SEASONS.at(month) as Seasons;
 ---
 
-<RootLayout title={title} description={description} season={season}>
-  <article class="grid grid-flow-row grid-cols-1 pt-5 sm:pt-10">
-    <h1 class={cn("m-0", "mb-4")}>
-      {title}
-    </h1>
+<RootLayout title={title} description={description}>
+  <!-- Zero-JS reading progress. Only rendered where scroll-driven animations
+       exist, so it never sits at 0% pretending to work. -->
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-bar"></div>
+  </div>
 
-    <div class="flex items-center gap-4">
-      <ReadingTime readingTime={readingTime} />
-      /
-      <FormattedDate date={pubDate} />
-    </div>
+  <article class="article">
+    <header class="head">
+      <a href="/" class="back" data-astro-prefetch>
+        <span aria-hidden="true">←</span> Writing
+      </a>
+
+      <h1 class="title">{title}</h1>
+
+      {!!description && <p class="standfirst">{description}</p>}
+
+      <div class="meta">
+        <FormattedDate date={pubDate} class="meta-date" />
+        {
+          !!readingTime && (
+            <>
+              <span class="meta-sep" aria-hidden="true">
+                ·
+              </span>
+              <ReadingTime readingTime={readingTime} />
+            </>
+          )
+        }
+        {
+          !!updatedDate && (
+            <>
+              <span class="meta-sep" aria-hidden="true">
+                ·
+              </span>
+              <span class="meta-updated">
+                Updated <FormattedDate date={updatedDate} />
+              </span>
+            </>
+          )
+        }
+      </div>
+    </header>
 
     {
-      !!updatedDate && (
-        <p class="mb-0 text-xs font-thin text-season-text/50">
-          Last updated at:
-          <FormattedDate date={updatedDate} />
-        </p>
+      !!heroImage && (
+        <figure class="hero breakout">
+          <img
+            src={heroImage}
+            alt={title}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
       )
     }
 
-    <!-- <hr class="mt-10 mb-20 border-dashed border-season-text/15" /> -->
-
-    <div class="w-full shrink-1 post mt-20">
-      {
-        !!heroImage && (
-          <div class="w-full aspect-video rounded-lg overflow-hidden bg-season/5 mb-20 border border-season-text/10" id="hero" data-hero-image={heroImage} data-title={title}>
-            <script>
-              const hero = document.querySelector<HTMLElement>("#hero");
-
-              if(hero) {
-                const heroImg = document.createElement("img");
-                heroImg.alt = hero.dataset.title || "";
-                heroImg.src = hero.dataset.heroImage || "";
-                heroImg.classList.add("w-full", "h-full", "object-cover", "opacity-0", "transition-opacity", "duration-500");
-
-                heroImg.addEventListener("load", () => {
-                  heroImg.classList.remove("opacity-0");
-                }, { once: true })
-
-                hero.append(heroImg);
-              }
-            </script>
-          </div>
-          
-        )
-      }
+    <div class="prose">
       <slot />
     </div>
+
+    <footer class="foot">
+      <a href="/" class="back" data-astro-prefetch>
+        <span aria-hidden="true">←</span> All writing
+      </a>
+    </footer>
   </article>
 </RootLayout>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Three-column measure grid: content sits in the middle track, anything
+     marked .breakout spans the full frame. */
+  .article {
+    display: grid;
+    grid-template-columns:
+      1fr
+      min(var(--container-measure), 100%)
+      1fr;
+    padding-bottom: 4rem;
+  }
+
+  .article > * {
+    grid-column: 2;
+  }
+
+  .article > .breakout {
+    grid-column: 1 / -1;
+  }
+
+  .head {
+    padding-top: clamp(2rem, 1rem + 5vw, 4.5rem);
+    padding-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    &:hover {
+      color: var(--clay);
+    }
+  }
+
+  .title {
+    margin-top: 1.35rem;
+    margin-bottom: 0;
+    font-size: var(--text-step-4);
+    font-stretch: 96%;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+
+  .standfirst {
+    margin-top: 1.1rem;
+    margin-bottom: 0;
+    max-width: 46ch;
+    font-size: var(--text-step-1);
+    line-height: 1.55;
+    letter-spacing: -0.012em;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .meta-sep {
+    opacity: 0.5;
+  }
+
+  .meta-updated {
+    color: color-mix(in oklab, var(--muted) 85%, transparent);
+  }
+
+  .hero {
+    margin: 0 0 clamp(2.5rem, 1.5rem + 4vw, 4rem);
+    overflow: hidden;
+    /* The mat shows through until the image decodes, so there is no flash
+       of empty page. */
+    background: color-mix(in oklab, var(--ink) 4%, transparent);
+    border: 1px solid var(--line);
+
+    @apply squircle;
+  }
+
+  .hero img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .foot {
+    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+  }
+
+  .progress-track {
+    display: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .progress-track {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 100%;
+      transform-origin: 0 50%;
+      background: linear-gradient(
+        to right,
+        var(--clay),
+        color-mix(in oklab, var(--clay) 55%, var(--ochre))
+      );
+      animation: progress-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @keyframes progress-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+</style>
