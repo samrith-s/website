@@ -111,21 +111,15 @@
   }
 
   code:not(.expressive-code pre > code) {
-    @apply py-0.5 
-      px-2 
-      rounded-lg 
-      text-[0.85em] 
-      bg-season-text/5 
-      dark:bg-season-text/10
-      text-season;
+    @apply bg-season-text/5 dark:bg-season-text/10 text-season rounded-lg px-2 py-0.5 text-[0.85em];
   }
 
   blockquote {
-    @apply relative pl-4 my-5 italic;
+    @apply relative my-5 pl-4 italic;
 
     &:before {
       content: "";
-      @apply absolute top-0 bottom-0 left-0 w-1 rounded-lg bg-season/50;
+      @apply bg-season/50 absolute top-0 bottom-0 left-0 w-1 rounded-lg;
     }
   }
 
@@ -139,7 +133,7 @@
 
   ul,
   ol {
-    @apply pl-5 my-5;
+    @apply my-5 pl-5;
 
     > ul,
     > ol {
@@ -189,7 +183,7 @@ a[target="_blank"]:not(.ignore):after {
 aside.admonition {
   &:before {
     content: attr(data-tag);
-    @apply px-3 py-1 text-xs font-bold rounded-md justify-self-start bg-season-text/5 dark:bg-season-text/10 -ml-1.5 -mt-1.5;
+    @apply bg-season-text/5 dark:bg-season-text/10 -mt-1.5 -ml-1.5 justify-self-start rounded-md px-3 py-1 text-xs font-bold;
   }
 
   > p:first-of-type {

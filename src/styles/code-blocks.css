@@ -2,6 +2,6 @@
   @apply my-4;
 
   figure.frame {
-    @apply shadow-none border-none;
+    @apply border-none shadow-none;
   }
 }

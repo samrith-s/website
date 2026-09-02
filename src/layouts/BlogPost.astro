@@ -47,7 +47,7 @@ const season = SEASONS.at(month) as Seasons;
         !!heroImage && (
           <div class="w-full aspect-video rounded-lg overflow-hidden bg-season/5 mb-20 border border-season-text/10" id="hero" data-hero-image={heroImage} data-title={title}>
             <script>
-              const hero = document.getElementById("hero");
+              const hero = document.querySelector<HTMLElement>("#hero");
 
               if(hero) {
                 const heroImg = document.createElement("img");
@@ -59,7 +59,7 @@ const season = SEASONS.at(month) as Seasons;
                   heroImg.classList.remove("opacity-0");
                 }, { once: true })
 
-                hero.appendChild(heroImg);
+                hero.append(heroImg);
               }
             </script>
           </div>

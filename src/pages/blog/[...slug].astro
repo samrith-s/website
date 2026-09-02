@@ -1,46 +1,27 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BlogPost from "@/layouts/BlogPost.astro";
 import { calculateReadingTime } from "@/utils/calculate-reading-time";
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  post: {
-    data: CollectionEntry<"blog">["data"];
-    readingTime: string;
-    heroImage?: string;
-    content: { Content: string };
-  };
+  post: CollectionEntry<"blog">;
 };
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
-  const postsWithContent = [];
-
-  for (const p of posts) {
-    postsWithContent.push({
-      ...p,
-      readingTime: calculateReadingTime(p.body),
-      content: await p.render(),
-    });
-  }
-
-  return postsWithContent.map((p) => ({
-    params: { slug: p.slug },
-    props: { post: p },
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
   }));
 }
 
-const {
-  post: {
-    data,
-    readingTime,
-    content: { Content },
-  },
-} = Astro.props;
+const { post } = Astro.props;
+const { Content } = await render(post);
+const readingTime = calculateReadingTime(post.body ?? "");
 ---
 
-<BlogPost {...data} readingTime={readingTime}>
+<BlogPost {...post.data} readingTime={readingTime}>
   <Content />
 </BlogPost>

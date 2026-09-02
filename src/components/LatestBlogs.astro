@@ -6,11 +6,11 @@ import { cn } from "@/utils/cn";
 const posts = (
   (await getCollection("blog")) as {
     data: { pubDate: Date; title: string; hero?: string };
-    slug: string;
+    id: string;
   }[]
 )
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .filter((p) => p.slug.toLowerCase().trim() !== "dummy");
+  .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .filter((p) => p.id.toLowerCase().trim() !== "dummy");
 
 const havePosts = posts.length > 0;
 ---
@@ -35,7 +35,7 @@ const havePosts = posts.length > 0;
             date={post.data.pubDate}
           />
           <span class="order-1 sm:order-2">
-            <a class="transition-all ignore-active" href={`/blog/${post.slug}`}>
+            <a class="transition-all ignore-active" href={`/blog/${post.id}`}>
               {post.data.title}
             </a>
           </span>

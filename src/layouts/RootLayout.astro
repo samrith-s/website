@@ -26,14 +26,9 @@ const currentSeason = (season || CURRENT_SEASON) as Seasons;
       let mode = localStorage.getItem("mode");
 
       if (!mode) {
-        if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          mode = "dark";
-        } else {
-          mode = "light";
-        }
+        mode = window.matchMedia?.("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
       }
 
       localStorage.setItem("mode", mode);

@@ -2,27 +2,24 @@ import { ImageResponse } from "@vercel/og";
 import type { APIRoute } from "astro";
 
 import { createOgImage } from "../components/OGImage";
-import { getQueryStrings } from "../utils/get-query-strings";
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request }) => {
-  const qs = getQueryStrings(request.url ?? "");
-  const title = qs.title;
-  const description = qs.description;
+  const params = new URL(request.url).searchParams;
+  const title = params.get("title") ?? undefined;
+  const description = params.get("description") ?? undefined;
 
   try {
     const regularFont = await fetch(
-      "https://samrith.dev/fonts/red-hat-text/regular.ttf",
+      "https://samrith.dev/fonts/red-hat-text/regular.ttf"
     ).then((res) => res.arrayBuffer());
 
     const boldFont = await fetch(
-      "https://samrith.dev/fonts/red-hat-text/bold.ttf",
+      "https://samrith.dev/fonts/red-hat-text/bold.ttf"
     ).then((res) => res.arrayBuffer());
 
     const res = new ImageResponse(createOgImage(title, description), {
-      width: 1024,
-      height: 640,
       fonts: [
         {
           name: "redhattext",
@@ -37,11 +34,13 @@ export const GET: APIRoute = async ({ request }) => {
           style: "normal",
         },
       ],
+      height: 640,
+      width: 1024,
     });
 
     return res;
-  } catch (e) {
-    console.error(e);
-    throw e;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };

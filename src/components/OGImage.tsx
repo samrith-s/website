@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-
 import { SITE_TITLE } from "../consts";
 
 export type OGImageProps = {
@@ -11,20 +9,20 @@ function OGImage({ title, description }: OGImageProps) {
   return (
     <div
       style={{
-        display: "flex",
-        backgroundColor: "black",
-        width: "100%",
-        height: "100%",
-        color: "white",
         alignItems: "center",
-        justifyContent: "flex-start",
+        backgroundColor: "black",
+        color: "white",
+        display: "flex",
         gap: "2rem",
+        height: "100%",
+        justifyContent: "flex-start",
         padding: 100,
+        width: "100%",
       }}
     >
       <img
         src="https://samrith.dev/logo.svg"
-        width="200"
+        width={200}
         alt="logo"
         style={{
           flexShrink: 0,
@@ -34,26 +32,26 @@ function OGImage({ title, description }: OGImageProps) {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "100%",
           flexShrink: 1,
+          width: "100%",
         }}
       >
         <h1
           style={{
-            margin: 0,
-            lineHeight: "3rem",
             fontFamily: '"redhattext"',
             fontSize: "3.5rem",
+            lineHeight: "3rem",
+            margin: 0,
           }}
         >
           {title || SITE_TITLE}
         </h1>
         <p
           style={{
-            marginTop: 10,
+            flexWrap: "wrap",
             fontFamily: '"redhattext"',
             fontSize: "2rem",
-            flexWrap: "wrap",
+            marginTop: 10,
             wordWrap: "break-word",
           }}
         >

@@ -1,9 +1,11 @@
-import getReadingTime from "reading-time";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { toString } from "mdast-util-to-string";
+import getReadingTime from "reading-time";
 
 export function calculateReadingTime(text: string): string | undefined {
-  if (!text || !text.length) return undefined;
+  if (!text || !text.length) {
+    return undefined;
+  }
 
   try {
     const { minutes } = getReadingTime(toString(fromMarkdown(text)));
@@ -13,8 +15,8 @@ export function calculateReadingTime(text: string): string | undefined {
       return `${Math.ceil(minutes)} ${isPlural ? "min" : "min"} read`;
     }
     return undefined;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     return undefined;
   }
 }

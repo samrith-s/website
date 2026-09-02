@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { Modes } from "../consts";
 import { cn } from "../utils/cn";
 
@@ -12,12 +13,15 @@ export function ModesToggle({ size = 18 }: ModeProps) {
 
   useEffect(() => {
     if (window?.MODE) {
+      // window.MODE is set by an inline script, so it can only be read after hydration.
+      // oxlint-disable-next-line react/set-state-in-effect
       setMode(window.MODE as Modes);
     }
   }, []);
 
   return (
     <button
+      type="button"
       className={cn(
         "flex",
         "items-center",
@@ -26,13 +30,13 @@ export function ModesToggle({ size = 18 }: ModeProps) {
         "px-3",
         "rounded-lg",
         "h-9",
-        "bg-season-text/5",
+        "bg-season-text/5"
       )}
       onClick={() => {
-        setMode((mode) => {
-          const newMode = mode === Modes.LIGHT ? Modes.DARK : Modes.LIGHT;
+        setMode((prev) => {
+          const newMode = prev === Modes.LIGHT ? Modes.DARK : Modes.LIGHT;
           localStorage.setItem("mode", newMode);
-          document.documentElement.classList.remove(mode);
+          document.documentElement.classList.remove(prev);
           document.documentElement.classList.add(newMode);
 
           return newMode;
@@ -51,11 +55,11 @@ export function ModesToggle({ size = 18 }: ModeProps) {
             fillRule="evenodd"
             d="M9.25 18.709c0-.42.336-.76.75-.76h4c.414 0 .75.34.75.76s-.336.76-.75.76h-4a.755.755 0 0 1-.75-.76m.667 2.532c0-.42.335-.76.75-.76h2.666c.415 0 .75.34.75.76a.754.754 0 0 1-.75.759h-2.666a.755.755 0 0 1-.75-.76"
             clipRule="evenodd"
-          ></path>
+          />
           <path
             fill="currentColor"
             d="m7.41 13.828l1.105 1.053c.31.295.485.707.485 1.137c0 .647.518 1.172 1.157 1.172h3.686c.639 0 1.157-.525 1.157-1.172c0-.43.176-.842.485-1.137l1.104-1.053c1.542-1.48 2.402-3.425 2.41-5.446L19 8.297C19 4.842 15.866 2 12 2S5 4.842 5 8.297v.085c.009 2.021.87 3.966 2.41 5.446"
-          ></path>
+          />
         </svg>
       )}
 
@@ -70,13 +74,13 @@ export function ModesToggle({ size = 18 }: ModeProps) {
             fill="currentColor"
             d="m7.41 13.828l1.105 1.053c.31.295.485.707.485 1.137c0 .647.518 1.172 1.157 1.172h3.686c.639 0 1.157-.525 1.157-1.172c0-.43.176-.842.485-1.137l1.104-1.053c1.542-1.48 2.402-3.425 2.41-5.446L19 8.297C19 4.842 15.866 2 12 2S5 4.842 5 8.297v.085c.009 2.021.87 3.966 2.41 5.446"
             opacity=".5"
-          ></path>
+          />
           <path
             fill="currentColor"
             fillRule="evenodd"
             d="M9.25 18.709c0-.42.336-.76.75-.76h4c.414 0 .75.34.75.76s-.336.76-.75.76h-4a.755.755 0 0 1-.75-.76m.667 2.531c0-.42.335-.76.75-.76h2.666c.415 0 .75.34.75.76s-.335.76-.75.76h-2.666a.755.755 0 0 1-.75-.76"
             clipRule="evenodd"
-          ></path>
+          />
         </svg>
       )}
     </button>

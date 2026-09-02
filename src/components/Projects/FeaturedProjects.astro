@@ -22,19 +22,20 @@ import projects from "@/projects.json";
 </div>
 
 <script>
-  const projects = document.querySelectorAll("[data-project-index]");
-  const swap = document.getElementById("prj-swap");
+  const projects =
+    document.querySelectorAll<HTMLElement>("[data-project-index]");
+  const swap = document.querySelector("#prj-swap");
 
-  const length = projects.length;
+  const { length } = projects;
 
   let currentActiveIndex = 0;
 
   swap?.addEventListener(
     "click",
-    function () {
-      projects[currentActiveIndex].setAttribute("data-project-active", "false");
+    () => {
+      projects[currentActiveIndex].dataset.projectActive = "false";
       currentActiveIndex = (currentActiveIndex - 1 + length) % length;
-      projects[currentActiveIndex].setAttribute("data-project-active", "true");
+      projects[currentActiveIndex].dataset.projectActive = "true";
     },
     true,
   );
